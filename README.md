@@ -13,7 +13,7 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-spo
 
 ## Milestone 2:
  * [ ] User chooses single player mode (against device), two player mode, or rules review page
- * [ ] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “
+ * [ ] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “Fight!" button
  * [ ] Two player mode uses Internet or Bluetooth pairing to match opponents (will choose after researching difficulty and reliability of each method)
  * [ ] User can select an icon on the rules review page to highlight relevant relationships when each icon is selected
 
