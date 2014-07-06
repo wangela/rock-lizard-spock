@@ -1,7 +1,8 @@
 Rock Paper Scissors Lizard Spock
 =================
 
-This is an app for Android mobile devices to play rock-paper-scissors-lizard-spock, an expanded version of the rock-paper-scissors game.
+This is an app for Android mobile devices to play rock-paper-scissors-lizard-spock, an expanded version of the rock-paper-scissors game.  
+[<img src="http://upload.wikimedia.org/wikipedia/commons/a/ad/Pierre_ciseaux_feuille_l%C3%A9zard_spock_aligned.svg" height="300px">](http://en.wikipedia.org/wiki/Rock-paper-scissors-lizard-Spock)
 
 ## Milestone 1:
  * [ ] Drawables for start screen, play screen and outcome screen created
