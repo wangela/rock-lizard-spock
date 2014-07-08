@@ -28,7 +28,7 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-spo
  * [ ] User can click on embedded YouTube video of Sheldon explaining the rules in Rules Review page (like https://play.google.com/store/apps/details?id=lal.app.rpsls&hl=en)
 
 Week 1 Milestone walkthrough:  
-Implemented all basic features in a single case (user choosing Spock only) to test code logic. Graphics and logic will multiply by 5 to handle other user choices.
+Implemented all basic features in a single case (user choosing Spock only) to test code logic. Graphics and logic will multiply by 5 to handle other user choices.  
 ![Video Walkthrough](anim_rock-lizard-spock.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
