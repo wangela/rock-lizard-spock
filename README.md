@@ -5,16 +5,16 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-spo
 [<img src="http://upload.wikimedia.org/wikipedia/commons/a/ad/Pierre_ciseaux_feuille_l%C3%A9zard_spock_aligned.svg" height="300px">](http://en.wikipedia.org/wiki/Rock-paper-scissors-lizard-Spock)
 
 ## Milestone 1:
- * [ ] Drawables for start screen, play screen and outcome screen created
- * [ ] User taps on one of the five icons to choose his champion
- * [ ] Device opponent chooses one of the five icons randomly as its champion
- * [ ] User sees his choice vs opponent’s choice and is informed of Win/Lose/Draw outcome along with the applicable rule
- * [ ] User can click “again” button to start over
- * [ ] User is always displayed as one color, Opponent is always displayed as a different color
+ * [x] Drawables for start screen, play screen and outcome screen created (1/5)
+ * [x] User taps on one of the five icons to choose his champion (1/5)
+ * [x] Device opponent chooses one of the five icons randomly as its champion
+ * [x] User sees his choice vs opponent’s choice and is informed of Win/Lose/Draw outcome along with the applicable rule
+ * [x] User can click “again” button to start over
+ * [x] User is always displayed as one color, Opponent is always displayed as a different color
 
 ## Milestone 2:
  * [ ] User chooses single player mode (against device), two player mode, or rules review page
- * [ ] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “Fight!" button
+ * [x] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “Fight!" button (1/5)
  * [ ] Two player mode uses Internet or Bluetooth pairing to match opponents (will choose after researching difficulty and reliability of each method)
  * [ ] User can select an icon on the rules review page to highlight relevant relationships when each icon is selected
 
@@ -27,7 +27,7 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-spo
  * [ ] User can set preferences (sound on/off, player name, limited time mode)
  * [ ] User can click on embedded YouTube video of Sheldon explaining the rules in Rules Review page (like https://play.google.com/store/apps/details?id=lal.app.rpsls&hl=en)
 
-Week 1 Milestone walkthrough:  
+**Week 1 Milestone walkthrough:**  
 Implemented all basic features in a single case (user choosing Spock only) to test code logic. Graphics and logic will multiply by 5 to handle other user choices.  
 ![Video Walkthrough](anim_rock-lizard-spock.gif)
 
