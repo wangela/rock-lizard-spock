@@ -3,5 +3,11 @@
 
     <string name="app_name">Rock Lizard Spock</string>
     <string name="hello_world">Hello world!</string>
+    <string name="one_player">Play One Player</string>
+    <string name="choose_your_weapon">Choose Your Weapon</string>
+    <string name="fight">Fight!</string>
+    <string name="you_win">You Win!</string>
+    <string name="win_rule">Spock smashes Scissors</string>
+    <string name="again">Again!</string>
 
 </resources>
