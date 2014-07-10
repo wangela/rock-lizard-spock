@@ -17,6 +17,9 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-spo
  * [x] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “Fight!" button (1/5)
  * [ ] Two player mode uses Internet or Bluetooth pairing to match opponents (will choose after researching difficulty and reliability of each method)
  * [ ] User can select an icon on the rules review page to highlight relevant relationships when each icon is selected
+ * [ ] User can click Home icon in action bar to return to start screen
+ * [ ] User can click Question icon in action bar to view Rules screen
+ * [ ] When viewing Rules screen, user can click "back" to return to previous screen with saved state if play was in progress
 
 ## Stretch:
  * [ ] User can click button on Outcome page to share status on Facebook “We just played Rock-Paper-Scissors-Lizard-Spock to decide…” with link to game webpage
