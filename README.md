@@ -1,7 +1,7 @@
 Rock Paper Scissors Lizard Spock
 =================
 
-This is an app for Android mobile devices to play rock-paper-scissors-lizard-spock, an expanded version of the rock-paper-scissors game.  
+This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spock, an expanded version of the rock-paper-scissors game.  The new game was invented by Sam Kass and Karen Bryla, and popularized by the television show *The Big Bang Theory*.  
 [<img src="http://upload.wikimedia.org/wikipedia/commons/a/ad/Pierre_ciseaux_feuille_l%C3%A9zard_spock_aligned.svg" height="300px">](http://en.wikipedia.org/wiki/Rock-paper-scissors-lizard-Spock)
 
 ## Milestone 1:
