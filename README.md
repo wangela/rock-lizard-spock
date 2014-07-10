@@ -32,3 +32,8 @@ Implemented all basic features in a single case (user choosing Spock only) to te
 ![Video Walkthrough](anim_rock-lizard-spock.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+## Implementation Notes
+One interesting challenge of building this app was to make the graphic of five clickable weapons scale to the many screen sizes found with Android devices. Simply placing the weapon circles as image buttons in a relative layout would subject them to unpredictable scaling behavior, breaking the nice symmetry of the pentagon shape when encountering wider or taller screen proportions.
+
+To account for this, I used an invisible hotspot image underlay with color-coded hotspots (credit to [Bill Lahti for his instructional tutorial](http://blahti.wordpress.com/2012/06/26/images-with-clickable-areas/) of this method). The hotspot image will scale exactly with the visible weapons image, and incurs minimal graphical overhead (the hotspot image is under 2 KB in filesize).
