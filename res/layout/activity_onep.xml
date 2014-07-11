@@ -13,8 +13,18 @@
         android:text="@string/choose_your_weapon" />
 
     <FrameLayout
+        android:id="@+id/flPlayspace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/ivHotspots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:src="@drawable/hotspots"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/ivChooseGray"
@@ -22,18 +32,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
-            android:onClick="onChoose"
             android:src="@drawable/choose_gray" />
 
         <ImageView
-            android:id="@+id/ivArrowsSpock"
+            android:id="@+id/ivArrows"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
-            android:src="@drawable/arrows_spock_selected"
+            android:src="@drawable/choose_gray"
             android:visibility="invisible" />
-
     </FrameLayout>
 
     <Button

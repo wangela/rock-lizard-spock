@@ -10,14 +10,14 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docname="lose_spock_lizard.svg"
+   sodipodi:docname="win_spock_rock.svg"
    version="1.0"
    height="600"
    width="600"
    inkscape:version="0.48.4 r9939"
    sodipodi:version="0.32"
    id="svg2"
-   inkscape:export-filename="C:\Users\Angela\workspace\RockLizardSpock\graphics\lose_spock_lizard.png"
+   inkscape:export-filename="C:\Users\Angela\workspace\RockLizardSpock\graphics\win_spock_rock.png"
    inkscape:export-xdpi="43.5"
    inkscape:export-ydpi="43.5">
   <sodipodi:namedview
@@ -34,7 +34,7 @@
      id="base"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="130.57143"
+     inkscape:cx="-25.42857"
      inkscape:cy="303.76776"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
@@ -324,21 +324,21 @@ A resolution diagram of the game &quot;Rock, Paper, Scissors, Lizard, Spock&quot
        inkscape:connector-curvature="0"
        id="path3516"
        d="m 216.58227,403.32059 62.36496,-201.18773 1.37333,0.40349 -62.38975,201.20676 -1.34854,-0.42252 z"
-       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.41696656;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:#0099cc;fill-opacity:1;fill-rule:evenodd;stroke:#0099cc;stroke-width:1.41696656000000010;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
        inkscape:connector-curvature="0"
        id="path12205"
        d="m 275.44336,215.87476 -7.09203,3.73529 11.28796,-17.26946 -0.46064,20.62621 -3.73529,-7.09204 z"
-       style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.13357325000000000pt;marker-start:none;fill-opacity:1;stroke-opacity:1" />
+       style="fill:#0099cc;fill-rule:evenodd;stroke:#0099cc;stroke-width:1.13357325000000000pt;marker-start:none;fill-opacity:1;stroke-opacity:1" />
     <path
        transform="matrix(0.24753557,-0.0094078,0.0094078,0.24753557,336.20051,169.54007)"
-       d="m 217.68127,-211.35745 a 343.83746,343.83746 0 1 1 -687.67492,0 343.83746,343.83746 0 1 1 687.67492,0 z"
+       d="m 217.68127,-211.35745 c 0,189.896185 -153.941272,343.83746 -343.83746,343.83746 -189.89619,0 -343.83746,-153.941275 -343.83746,-343.83746 0,-189.89619 153.94127,-343.83747 343.83746,-343.83747 189.896188,0 343.83746,153.94128 343.83746,343.83747 z"
        sodipodi:ry="343.83746"
        sodipodi:rx="343.83746"
        sodipodi:cy="-211.35745"
        sodipodi:cx="-126.15619"
        id="use3420"
-       style="fill:#0000ff;fill-opacity:0.12941177;stroke:#0000ff;stroke-width:11.44032955000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff4444;fill-opacity:0.12941177;stroke:#ff4444;stroke-width:11.44032955000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        sodipodi:type="arc" />
     <g
        id="g3267"
@@ -383,13 +383,13 @@ A resolution diagram of the game &quot;Rock, Paper, Scissors, Lizard, Spock&quot
     </g>
     <path
        transform="matrix(-0.24771147,0.00117991,0.00117991,0.24771147,162.21572,537.9474)"
-       d="m 217.68127,-211.35745 a 343.83746,343.83746 0 1 1 -687.67492,0 343.83746,343.83746 0 1 1 687.67492,0 z"
+       d="m 217.68127,-211.35745 c 0,189.896185 -153.941272,343.83746 -343.83746,343.83746 -189.89619,0 -343.83746,-153.941275 -343.83746,-343.83746 0,-189.89619 153.94127,-343.83747 343.83746,-343.83747 189.896188,0 343.83746,153.94128 343.83746,343.83747 z"
        sodipodi:ry="343.83746"
        sodipodi:rx="343.83746"
        sodipodi:cy="-211.35745"
        sodipodi:cx="-126.15619"
        id="use3418"
-       style="fill:#ff0000;fill-opacity:0.12941177;stroke:#ff0000;stroke-width:11.44032955000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#0099cc;fill-opacity:0.12941177000000001;stroke:#0099cc;stroke-width:11.44032955000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        sodipodi:type="arc" />
     <g
        id="g3409"

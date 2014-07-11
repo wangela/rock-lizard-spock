@@ -9,5 +9,11 @@
     <string name="you_win">You Win!</string>
     <string name="win_rule">Spock smashes Scissors</string>
     <string name="again">Again!</string>
+    <string name="home">Home</string>
+    <string name="rules">Rules</string>
+    <string name="about">About</string>
+    <string name="rules_of_rpsls">The Rules of \nRock-Paper-Scissors-Lizard-Spock</string>
+    <string name="rule_list">SCISSORS cut PAPER\nPAPER covers ROCK\nROCK crushes LIZARD\nLIZARD poisons SPOCK\nSPOCK smashes SCISSORS\nSCISSORS decapitate LIZARD\nLIZARD eats PAPER\nPAPER disproves SPOCK\nSPOCK vaporizes ROCK\nROCK crushes SCISSORS</string>
+    <string name="title_activity_rules">RulesActivity</string>
 
 </resources>

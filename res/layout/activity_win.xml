@@ -29,43 +29,13 @@
             android:src="@drawable/choose_gray" />
 
         <ImageView
-            android:id="@+id/ivSPOCKSCISSORS"
+            android:id="@+id/ivWinImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:src="@drawable/win_spock_scissors"
             android:tag="SPOCK_SCISSORS"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/ivSPOCKROCK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/win_spock_rock"
-            android:tag="SPOCK_ROCK"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/ivSPOCKLIZARD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/lose_spock_lizard"
-            android:tag="SPOCK_LIZARD"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/ivSPOCKPAPER"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/lose_spock_paper"
-            android:tag="SPOCK_PAPER"
             android:visibility="invisible" />
     </FrameLayout>
 

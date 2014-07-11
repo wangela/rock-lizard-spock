@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/miHome" android:showAsAction="always" android:title="@string/home" android:icon="@drawable/ic_home"></item>
+    <item android:id="@+id/miRules" android:showAsAction="always" android:title="@string/rules" android:icon="@drawable/ic_rules"></item>
+    
+
+</menu>
