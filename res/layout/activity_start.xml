@@ -24,4 +24,14 @@
         android:scaleType="center"
         android:src="@drawable/choose" />
 
+    <Button
+        android:id="@+id/btnTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnOne"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:onClick="onTwoPlayer"
+        android:text="@string/two_player" />
+
 </RelativeLayout>

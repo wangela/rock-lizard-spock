@@ -41,6 +41,14 @@
             android:launchMode="singleTask"
             android:stateNotNeeded="true" >
         </activity>
+        <activity
+            android:name=".TwoPPassActivity"
+            android:label="@string/title_activity_two_ppass" >
+        </activity>
+        <activity
+            android:name=".TwoPWinActivity"
+            android:label="@string/title_activity_two_pwin" >
+        </activity>
     </application>
 
 </manifest>

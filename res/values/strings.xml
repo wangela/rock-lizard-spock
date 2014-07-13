@@ -15,5 +15,13 @@
     <string name="rules_of_rpsls">The Rules of \nRock-Paper-Scissors-Lizard-Spock</string>
     <string name="rule_list">SCISSORS cut PAPER\nPAPER covers ROCK\nROCK crushes LIZARD\nLIZARD poisons SPOCK\nSPOCK smashes SCISSORS\nSCISSORS decapitate LIZARD\nLIZARD eats PAPER\nPAPER disproves SPOCK\nSPOCK vaporizes ROCK\nROCK crushes SCISSORS</string>
     <string name="title_activity_rules">RulesActivity</string>
+    <string name="title_activity_two_ppass">TwoPPassActivity</string>
+    <string name="choose_your_weaponP">Player 1, Choose Your Weapon</string>
+    <string name="choose">Choose</string>
+    <string name="passed">Ready</string>
+    <string name="now_pass">Now, pass to Player 2 and press "Ready"</string>
+    <string name="choose_your_weaponP2">Player 2, Choose Your Weapon</string>
+    <string name="title_activity_two_pwin">TwoPWinActivity</string>
+    <string name="two_player">Play Two Player</string>
 
 </resources>

@@ -42,4 +42,11 @@ public class StartActivity extends Activity {
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
 	}
+	
+	public void onTwoPlayer(View v) {
+		Intent i = new Intent(this, TwoPPassActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(i);
+	}
 }

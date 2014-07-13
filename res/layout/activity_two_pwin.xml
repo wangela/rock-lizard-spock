@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvOutcome"
+        android:id="@+id/tvTOutcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,7 +20,7 @@
         android:background="#00ffff33" >
 
         <ImageView
-            android:id="@+id/ivWinGray"
+            android:id="@+id/ivTWinGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -28,7 +28,7 @@
             android:src="@drawable/choose_gray" />
 
         <ImageView
-            android:id="@+id/ivWinImage"
+            android:id="@+id/ivTWinImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/tvWinRule"
+        android:id="@+id/tvTWinRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -47,7 +47,7 @@
         android:text="@string/win_rule" />
 
     <Button
-        android:id="@+id/btnAgain"
+        android:id="@+id/btnTAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
