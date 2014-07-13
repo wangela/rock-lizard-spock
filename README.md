@@ -39,7 +39,7 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spo
 One-player mode and Rules page view:  
 ![Video Walkthrough](anim_rock-lizard-spock.gif)
 
-Two-player mode (Pass-and-Play version):
+Two-player mode (Pass-and-Play version):  
 ![Video Walkthrough](anim_rock-lizard-spock2PPass.gif)
 
 GIFs created with [LiceCap](http://www.cockos.com/licecap/).
