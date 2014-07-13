@@ -13,12 +13,12 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spo
  * [x] User is always displayed as one color, Opponent is always displayed as a different color
 
 ## Milestone 2:
- * [ ] User chooses single player mode (against device), two player mode, or rules review page
+ * [x] User chooses single player mode (against device), two player mode, or rules review page
  * [x] User can preview his choice’s relationships with the other icons before locking in his choice with a separate “Fight!" button (5/5)
  * [ ] Two player mode uses Internet or Bluetooth pairing to match opponents (will choose after researching difficulty and reliability of each method)
  * [ ] Two player mode gives option of "Pass & Play" version or "private wifi" version
- * [ ] In "Pass & Play" version, P1 chooses weapon as normal, then weapon is hidden and P1 is instructed to pass device to P2 to choose weapon.
- * [ ] In "Pass & Play" version, the winner is announced.
+ * [x] In "Pass & Play" version, P1 chooses weapon as normal, then weapon is hidden and P1 is instructed to pass device to P2 to choose weapon.
+ * [x] In "Pass & Play" version, the winner is announced.
  * [ ] In "private wifi" version, after both players have chosen their weapon, each player sees the outcome from their own point of view (one sees "you win!", one sees "you lose!").
  * [x] User can select an icon on the rules review page to highlight relevant relationships when each icon is selected
  * [x] User can click Home icon in action bar to return to start screen
@@ -34,11 +34,16 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spo
  * [ ] User can set preferences (sound on/off, player name, limited time mode)
  * [ ] User can click on embedded YouTube video of Sheldon explaining the rules in Rules Review page (like https://play.google.com/store/apps/details?id=lal.app.rpsls&hl=en)
 
-**Week 1 Milestone walkthrough:**  
-Implemented all basic features in a single case (user choosing Spock only) to test code logic. Graphics and logic will multiply by 5 to handle other user choices.  
+
+**Week 2 Milestone walkthrough:**
+One-player mode and Rules page view:  
 ![Video Walkthrough](anim_rock-lizard-spock.gif)
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+Two-player mode (Pass-and-Play version):
+![Video Walkthrough](anim_rock-lizard-spock2PPass.gif)
+
+GIFs created with [LiceCap](http://www.cockos.com/licecap/).
+
 
 ## Implementation Notes
 One interesting challenge of building this app was to make the graphic of five clickable weapons scale to the many screen sizes found with Android devices. Simply placing the weapon circles as image buttons in a relative layout would subject them to unpredictable scaling behavior, breaking the nice symmetry of the pentagon shape when encountering wider or taller screen proportions.
