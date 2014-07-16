@@ -52,6 +52,9 @@ One interesting challenge of building this app was to make the graphic of five c
 To account for this, I used an invisible hotspot image underlay with color-coded hotspots (credit to [Bill Lahti for his instructional tutorial](http://blahti.wordpress.com/2012/06/26/images-with-clickable-areas/) of this method). The hotspot image will scale exactly with the visible weapons image, and incurs minimal graphical overhead (the hotspot image is under 2 KB in filesize).
 
 **Sticky Item in a ScrollView**  
-Another UX feature I wanted was for the five-weapon graphic to stay visible on screen no matter how far down in the rules the user has scrolled. Although there are only 10 rules, they tend to extend off screen for most smartphones, and even if the user was viewing the last rule I wanted him to be able to refer to the diagram.
+Another UX feature I wanted was for the Rules page. I wanted the five-weapon graphic to stay visible on screen no matter how far down in the rules the user has scrolled. Although there are only 10 rules, they tend to extend off screen for most smartphones, and even if the user was viewing the last rule I wanted him to be able to refer to the diagram.
 
 A nice solution I found was Emil Sjölander's [Sticky ScrollView Items library](https://github.com/emilsjolander/StickyScrollViewItems) which was much more convenient to implement than Roman Nurik's fragment-based ["Sticky"](https://plus.google.com/+RomanNurik/posts/1Sb549FvpJt) which I am including here in case you prefer to try it.
+
+**Custom Launcher App Icon**  
+I very much appreciated Roman Nurik's [Android Launcher Icon Generator](http://romannurik.github.io/AndroidAssetStudio/icons-launcher.html) which gave my icon the bevel effect suggested by [Android design guidelines](http://android-developers.blogspot.com/2013/07/making-beautiful-android-app-icons.html). It was much nicer than what I was able to achieve after quite a bit of time mucking around with rudimentary Illustrator skills.
