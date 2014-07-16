@@ -45,6 +45,8 @@ public class StartActivity extends Activity {
 	
 	public void onTwoPlayer(View v) {
 		Intent i = new Intent(this, TwoPPassActivity.class);
+		// Intent i = new Intent(this, TwoPBluetoothActivity.class);
+		// Intent i = new Intent(this, TwoPWifiActivity.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);

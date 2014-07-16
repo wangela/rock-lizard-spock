@@ -14,7 +14,6 @@ public class WinActivity extends Activity {
 	private String opponentWeapon;
 	private String outcome;
 	private String winRule;
-	// private String winTag;
 	private TextView tvOutcome;
 	private TextView tvWinRule;
 	private int nextImage;
@@ -243,8 +242,6 @@ public class WinActivity extends Activity {
 		tvWinRule = (TextView) findViewById(R.id.tvWinRule);
 		tvWinRule.setText(winRule);
 
-		// winTag = "iv" + myWeapon + opponentWeapon;
-		// int outId = getResources().getIdentifier(winTag, "id", getPackageName());
 		ivOutcome = (ImageView) findViewById(R.id.ivWinImage);
 		ivOutcome.setImageResource(nextImage);
 		ivOutcome.setVisibility(ImageView.VISIBLE);

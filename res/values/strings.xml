@@ -19,9 +19,24 @@
     <string name="choose_your_weaponP">Player 1, Choose Your Weapon</string>
     <string name="choose">Choose</string>
     <string name="passed">Ready</string>
-    <string name="now_pass">Now, pass to Player 2 and press "Ready"</string>
     <string name="choose_your_weaponP2">Player 2, Choose Your Weapon</string>
     <string name="title_activity_two_pwin">TwoPWinActivity</string>
     <string name="two_player">Play Two Player</string>
+    <string name="title_activity_two_pwifi">TwoPWifiActivity</string>
+    <string name="title_activity_two_pbluetooth">TwoPBluetoothActivity</string>
+    <string name="scissors">SCISSORS</string>
+    <string name="cut">cut</string>
+    <string name="paper">PAPER</string>
+    <string name="covers">covers</string>
+    <string name="rock">ROCK</string>
+    <string name="crushes">crushes</string>
+    <string name="lizard">LIZARD</string>
+    <string name="poisons">poisons</string>
+    <string name="spock">SPOCK</string>
+    <string name="smashes">smashes</string>
+    <string name="decapitate">decpaitate</string>
+    <string name="eats">eats</string>
+    <string name="disproves">disproves</string>
+    <string name="vaporizes">vaporizes</string>
 
 </resources>

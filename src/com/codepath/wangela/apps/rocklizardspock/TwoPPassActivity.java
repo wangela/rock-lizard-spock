@@ -34,10 +34,34 @@ public class TwoPPassActivity extends OnePActivity {
 		setContentView(R.layout.activity_two_ppass);
 		setupViews();
 	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_play, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.miHome:
+                Intent i = new Intent(this, StartActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+            case R.id.miRules:
+                Intent intent = new Intent(this, RulesActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 	private void setupViews() {
 		btnChoose = (Button) findViewById(R.id.btnPChoose);
-		btnPass = (Button) findViewById(R.id.btnPPass);
 		btnFight = (Button) findViewById(R.id.btnPFight);
 		tvPass = (TextView) findViewById(R.id.tvPChoose);
 		iv = (ImageView) findViewById(R.id.ivPArrows);
@@ -102,16 +126,9 @@ public class TwoPPassActivity extends OnePActivity {
 
 	public void onChoose(View v) {
 		btnChoose.setVisibility(Button.INVISIBLE);
-		tvPass.setText(R.string.now_pass);
 		iv.setImageResource(R.drawable.choose_gray);
 		nextImage = R.drawable.choose_gray;
 		ivGray.setOnTouchListener(null);
-		btnPass.bringToFront();
-		btnPass.setVisibility(Button.VISIBLE);
-	}
-
-	public void onPass(View v) {
-		btnPass.setVisibility(Button.INVISIBLE);
 		tvPass.setText(R.string.choose_your_weaponP2);
 		
 		ivGray.setOnTouchListener(new OnTouchListener() {

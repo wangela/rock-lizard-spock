@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/tvOutcome"
+        style="@style/WinText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/you_win"
-        android:textStyle="bold" />
+        android:text="@string/you_win" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/choose_gray" />
 
         <ImageView
@@ -32,7 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/win_spock_scissors"
             android:tag="SPOCK_SCISSORS"
             android:visibility="invisible" />
@@ -40,6 +42,7 @@
 
     <TextView
         android:id="@+id/tvWinRule"
+        style="@style/LightText.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -48,6 +51,7 @@
 
     <Button
         android:id="@+id/btnAgain"
+        style="@style/FightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

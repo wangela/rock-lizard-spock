@@ -5,14 +5,25 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Google Play filtering -->
+    <uses-feature
+        android:name="android.hardware.wifi.direct"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_launcher_spock"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/MyCustomTheme" >
         <activity
             android:name=".StartActivity"
             android:label="@string/app_name"
@@ -43,11 +54,23 @@
         </activity>
         <activity
             android:name=".TwoPPassActivity"
-            android:label="@string/title_activity_two_ppass" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true" >
         </activity>
         <activity
             android:name=".TwoPWinActivity"
-            android:label="@string/title_activity_two_pwin" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true" >
+        </activity>
+        <activity
+            android:name=".TwoPWifiActivity"
+            android:label="@string/title_activity_two_pwifi" >
+        </activity>
+        <activity
+            android:name=".TwoPBluetoothActivity"
+            android:label="@string/title_activity_two_pbluetooth" >
         </activity>
     </application>
 

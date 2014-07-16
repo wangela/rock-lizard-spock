@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/tvTOutcome"
+        style="@style/WinText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/you_win"
-        android:textStyle="bold" />
+        android:text="@string/you_win" />
 
     <FrameLayout
         android:layout_width="match_parent"

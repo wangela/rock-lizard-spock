@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import com.emilsjolander.components.StickyScrollViewItems.StickyScrollView;
 
 public class RulesActivity extends Activity {
 	private ImageView ivGray;
@@ -40,6 +38,7 @@ public class RulesActivity extends Activity {
     }
     
 	private void setupViews() {
+
 		iv = (ImageView) findViewById(R.id.ivRArrows); // tie to the Arrows
 														// ImageView
 		ivGray = (ImageView) findViewById(R.id.ivRChooseGray);

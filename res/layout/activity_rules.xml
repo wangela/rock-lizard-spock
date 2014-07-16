@@ -1,66 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<com.emilsjolander.components.StickyScrollViewItems.StickyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    whatever:stuckShadowDrawable="@drawable/sticky_shadow_default" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvRules"
+            style="@style/LightText.Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/rules_of_rpsls" />
+
+        <FrameLayout
+            android:id="@+id/flRulespace"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:tag="sticky" >
 
-            <TextView
-                android:id="@+id/tvRules"
+            <ImageView
+                android:id="@+id/ivRHotspots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="@string/rules_of_rpsls" />
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:src="@drawable/hotspots"
+                android:visibility="invisible" />
 
-            <FrameLayout
-                android:id="@+id/flRulespace"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/ivRChooseGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:src="@drawable/choose_gray" />
+
+            <ImageView
+                android:id="@+id/ivRArrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:src="@drawable/choose" />
+        </FrameLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
-                <ImageView
-                    android:id="@+id/ivRHotspots"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/hotspots"
-                    android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/tvR1W1"
+                    style="@style/LightText"
+                    android:text="@string/scissors" >
+                </TextView>
 
-                <ImageView
-                    android:id="@+id/ivRChooseGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/choose_gray" />
+                <TextView
+                    android:id="@+id/tvR1Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/cut" >
+                </TextView>
 
-                <ImageView
-                    android:id="@+id/ivRArrows"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/choose" />
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/tvR1W2"
+                    style="@style/LightText"
+                    android:text="@string/paper" >
+                </TextView>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/tvRuleList"
+            <TableRow
+                android:id="@+id/tableRow2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/rule_list" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_height="wrap_content" >
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/tvR2W1"
+                    style="@style/LightText"
+                    android:text="@string/paper" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR2Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/covers" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR2W2"
+                    style="@style/LightText"
+                    android:text="@string/rock" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR3W1"
+                    style="@style/LightText"
+                    android:text="@string/rock" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR3Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/crushes" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR3W2"
+                    style="@style/LightText"
+                    android:text="@string/lizard" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR4W1"
+                    style="@style/LightText"
+                    android:text="@string/lizard" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR4Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/poisons" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR4W2"
+                    style="@style/LightText"
+                    android:text="@string/spock" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR5W1"
+                    style="@style/LightText"
+                    android:text="@string/spock" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR5Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/smashes" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR5W2"
+                    style="@style/LightText"
+                    android:text="@string/scissors" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR6W1"
+                    style="@style/LightText"
+                    android:text="@string/scissors" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR6Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/decapitate" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR6W2"
+                    style="@style/LightText"
+                    android:text="@string/lizard" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR7W1"
+                    style="@style/LightText"
+                    android:text="@string/lizard" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR7Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/eats" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR7W2"
+                    style="@style/LightText"
+                    android:text="@string/paper" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR8W1"
+                    style="@style/LightText"
+                    android:text="@string/paper" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR8Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/disproves" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR8W2"
+                    style="@style/LightText"
+                    android:text="@string/spock" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR9W1"
+                    style="@style/LightText"
+                    android:text="@string/spock" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR9Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/vaporizes" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR9W2"
+                    style="@style/LightText"
+                    android:text="@string/rock" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvR10W1"
+                    style="@style/LightText"
+                    android:text="@string/rock" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR10Verb"
+                    style="@style/LightText"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/crushes" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvR10W2"
+                    style="@style/LightText"
+                    android:text="@string/scissors" >
+                </TextView>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
