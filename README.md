@@ -35,7 +35,7 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spo
  * [ ] User can click on embedded YouTube video of Sheldon explaining the rules in Rules Review page (like https://play.google.com/store/apps/details?id=lal.app.rpsls&hl=en)
 
 
-**Week 2 Milestone walkthrough:**
+**Week 2 Milestone walkthrough:**  
 One-player mode and Rules page view:  
 ![Video Walkthrough](anim_rock-lizard-spock1PRules.gif)
 
