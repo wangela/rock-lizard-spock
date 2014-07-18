@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyCustomTheme" >
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.StartActivity"
             android:label="@string/app_name"
             android:launchMode="singleInstance" >
             <intent-filter>
@@ -35,31 +35,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OnePActivity"
+            android:name=".activities.OnePActivity"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
             android:stateNotNeeded="true" >
         </activity>
         <activity
-            android:name=".WinActivity"
+            android:name=".activities.WinActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:stateNotNeeded="true" >
         </activity>
         <activity
-            android:name=".RulesActivity"
+            android:name=".activities.RulesActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:stateNotNeeded="true" >
         </activity>
         <activity
-            android:name=".TwoPPassActivity"
+            android:name=".activities.TwoPPassActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:stateNotNeeded="true" >
         </activity>
         <activity
-            android:name=".TwoPWinActivity"
+            android:name=".activities.TwoPWinActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:stateNotNeeded="true" >
@@ -71,6 +71,15 @@
         <activity
             android:name=".TwoPBluetoothActivity"
             android:label="@string/title_activity_two_pbluetooth" >
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name=".FBLoginActivity"
+                        android:label="@string/app_name" >
         </activity>
     </application>
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ffff33"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <TextView
@@ -16,8 +16,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00ffff33" >
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/ivTWinGray"
@@ -48,10 +47,21 @@
 
     <Button
         android:id="@+id/btnTAgain"
+        style="@style/FightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onAgain"
         android:text="@string/again" />
+
+    <Button
+        android:id="@+id/btnShare"
+        style="@style/FightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:onClick="onShare"
+        android:text="@string/share" />
 
 </LinearLayout>

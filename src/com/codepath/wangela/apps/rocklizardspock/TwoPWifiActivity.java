@@ -2,6 +2,9 @@
 
 package com.codepath.wangela.apps.rocklizardspock;
 
+import com.codepath.wangela.apps.rocklizardspock.activities.OnePActivity;
+import com.codepath.wangela.apps.rocklizardspock.helpers.WifiDirectBroadcastReceiver;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;

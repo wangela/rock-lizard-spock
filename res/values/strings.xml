@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Rock Lizard Spock</string>
+    <string name="app_id">275527979298725</string>
     <string name="hello_world">Hello world!</string>
     <string name="one_player">Play One Player</string>
     <string name="choose_your_weapon">Choose Your Weapon</string>
@@ -38,5 +39,7 @@
     <string name="eats">eats</string>
     <string name="disproves">disproves</string>
     <string name="vaporizes">vaporizes</string>
+    <string name="title_activity_fblogin">FBLoginActivity</string>
+    <string name="share">Tell Facebook friends</string>
 
 </resources>

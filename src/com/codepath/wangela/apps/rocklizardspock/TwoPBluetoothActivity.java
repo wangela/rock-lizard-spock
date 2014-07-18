@@ -1,5 +1,8 @@
 package com.codepath.wangela.apps.rocklizardspock;
 
+import com.codepath.wangela.apps.rocklizardspock.activities.RulesActivity;
+import com.codepath.wangela.apps.rocklizardspock.activities.StartActivity;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
