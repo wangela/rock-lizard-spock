@@ -35,11 +35,12 @@
     <string name="poisons">poisons</string>
     <string name="spock">SPOCK</string>
     <string name="smashes">smashes</string>
-    <string name="decapitate">decpaitate</string>
+    <string name="decapitate">decapitate</string>
     <string name="eats">eats</string>
     <string name="disproves">disproves</string>
     <string name="vaporizes">vaporizes</string>
     <string name="title_activity_fblogin">FBLoginActivity</string>
     <string name="share">Tell Facebook friends</string>
+    <string name="login">Log in to Facebook</string>
 
 </resources>

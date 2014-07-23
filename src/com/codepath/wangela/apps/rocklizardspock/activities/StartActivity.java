@@ -1,16 +1,15 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
-import com.codepath.wangela.apps.rocklizardspock.R;
-import com.codepath.wangela.apps.rocklizardspock.R.id;
-import com.codepath.wangela.apps.rocklizardspock.R.layout;
-import com.codepath.wangela.apps.rocklizardspock.R.menu;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.codepath.wangela.apps.rocklizardspock.R;
+import com.facebook.AppLinkData;
 
 public class StartActivity extends Activity {
 
@@ -18,6 +17,18 @@ public class StartActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+		
+	    AppLinkData appLinkData = AppLinkData.createFromActivity(this);
+	    if (appLinkData != null) {
+	        Bundle arguments = appLinkData.getArgumentBundle();
+	        if (arguments != null) {
+	            String targetUrl = arguments.getString("target_url");
+	            if (targetUrl != null) {
+	              Log.i("Activity", "Target URL: " + targetUrl);
+	            }
+	        }
+	    }
+
 	}
 
     @Override
@@ -34,6 +45,7 @@ public class StartActivity extends Activity {
             case R.id.miAbout:
                 Intent intent = new Intent(this, RulesActivity.class);
                 startActivity(intent);
+    			overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

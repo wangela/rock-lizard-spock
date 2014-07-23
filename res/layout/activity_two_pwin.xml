@@ -16,7 +16,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="300dp" >
 
         <ImageView
             android:id="@+id/ivTWinGray"
@@ -53,6 +53,21 @@
         android:layout_gravity="center"
         android:onClick="onAgain"
         android:text="@string/again" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/FightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="@string/login" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
     <Button
         android:id="@+id/btnShare"

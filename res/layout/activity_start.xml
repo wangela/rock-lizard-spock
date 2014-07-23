@@ -2,41 +2,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="top"
     android:background="@android:color/white"
     tools:context="${relativePackage}.${activityClass}" >
 
     <ImageView
         android:id="@+id/ivStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
-        android:scaleType="center"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:src="@drawable/choose" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivStart"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:showDividers="beginning" >
+         
+            <ImageButton
+                android:id="@+id/btnOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/states_play_button_one"
+                android:onClick="onOnePlayer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/button_one_player" />
+
+    <ImageButton
+        android:id="@+id/btnTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ivStart"
-        android:layout_centerInParent="true" >
-
-        <ImageButton
-            android:id="@+id/btnOne"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/states_play_button_one"
-            android:onClick="onOnePlayer"
-            android:scaleType="fitXY" />
-
-        <ImageButton
-            android:id="@+id/btnTwo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/states_play_button_two"
-            android:onClick="onTwoPlayer"
-            android:scaleType="fitXY" />
+        android:layout_gravity="left"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="@drawable/states_play_button_two"
+        android:onClick="onTwoPlayer"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_two_player" />
+    
     </LinearLayout>
 
 </RelativeLayout>

@@ -3,14 +3,14 @@
         <item
         android:state_selected="false"
         android:state_pressed="false"
-        android:drawable="@drawable/button_two_player" />
+        android:drawable="@color/white" />
 
     <item android:state_pressed="true"
-          android:drawable="@drawable/button_two_player_pressed" />
+          android:drawable="@color/black" />
  
     <item android:state_selected="true"
           android:state_pressed="false"
-          android:drawable="@drawable/button_two_player_pressed" />
+          android:drawable="@color/black" />
     
 
 </selector>

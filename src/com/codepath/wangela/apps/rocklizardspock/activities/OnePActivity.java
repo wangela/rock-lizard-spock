@@ -1,37 +1,46 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
-import com.codepath.wangela.apps.rocklizardspock.R;
-import com.codepath.wangela.apps.rocklizardspock.R.drawable;
-import com.codepath.wangela.apps.rocklizardspock.R.id;
-import com.codepath.wangela.apps.rocklizardspock.R.layout;
-import com.codepath.wangela.apps.rocklizardspock.R.menu;
-import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
-import com.codepath.wangela.apps.rocklizardspock.models.Weapon;
-
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.codepath.wangela.apps.rocklizardspock.R;
+import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
+import com.codepath.wangela.apps.rocklizardspock.models.Weapon;
 
 public class OnePActivity extends Activity {
 	private ImageView ivGray;
+	private ImageView ivOpponentGray;
 	private ImageView iv;
-	private int nextImage;
-	private String myWeapon;
+	private ImageView ivO;
 	private Button btnFight;
+	private RelativeLayout rlPlayspace;
+	private RelativeLayout rlOpponent;
+	private TextView tvChoice;
+	private TextView tvOpponent;
+	private ImageView hotspots;
+	private ImageView arrows;
+	private int nextImage = 0;
+	private String myWeapon;
+	Weapon opponentWeapon;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,35 +49,50 @@ public class OnePActivity extends Activity {
 		setupViews();
 	}
 	
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_play, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.miHome:
-                Intent i = new Intent(this, StartActivity.class);
-                startActivity(i);
-                finish();
-                return true;
-            case R.id.miRules:
-                Intent intent = new Intent(this, RulesActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// Ignore screen rotation
+		super.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_play, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.miHome:
+			Intent i = new Intent(this, StartActivity.class);
+			startActivity(i);
+			finish();
+			return true;
+		case R.id.miRules:
+			Intent intent = new Intent(this, RulesActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 	private void setupViews() {
 		btnFight = (Button) findViewById(R.id.btnFight);
-		iv = (ImageView) findViewById(R.id.ivArrows);
+		rlPlayspace = (RelativeLayout) findViewById(R.id.rlPlayspace);
+		rlOpponent = (RelativeLayout) findViewById(R.id.rlOpponent);
+		ivO = (ImageView) findViewById(R.id.ivOpponentArrows);
+		tvOpponent = (TextView) findViewById(R.id.tvOpponent);
+		ivOpponentGray = (ImageView) findViewById(R.id.ivOpponentChooseGray);
+		hotspots = (ImageView) findViewById(R.id.ivHotspots);
 		ivGray = (ImageView) findViewById(R.id.ivChooseGray);
+		arrows = (ImageView) findViewById(R.id.ivArrows);
+		tvChoice = (TextView) findViewById(R.id.tvChoice);
+
 		ivGray.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
@@ -82,7 +106,7 @@ public class OnePActivity extends Activity {
 					// The hidden image (hotspots.png) has five different
 					// hotspots on it.
 					// The colors are red, green, blue, magenta, and yellow.
-					iv.setVisibility(ImageView.INVISIBLE);
+					arrows.setVisibility(ImageView.INVISIBLE);
 					int touchColor = getHotspotColor(R.id.ivHotspots, evX, evY);
 					// Compare the touchColor to the expected values.
 					// Switch to a different image, depending on what color was
@@ -118,13 +142,84 @@ public class OnePActivity extends Activity {
 					break;
 				} // end switch
 				if (nextImage > 0) {
-					iv.setImageResource(nextImage);
+					arrows.setImageResource(nextImage);
+					tvChoice.setText("You choose " + myWeapon);
+					tvChoice.setVisibility(TextView.VISIBLE);
 				}
+				arrows.setVisibility(ImageView.VISIBLE);
 				btnFight.setVisibility(Button.VISIBLE);
-				iv.setVisibility(ImageView.VISIBLE);
 				return true;
 			}
 		});
+	}
+
+	public void onFight(View v) {
+		btnFight.setVisibility(Button.INVISIBLE);
+		ivGray.setOnTouchListener(null);
+
+		opponentWeapon = Weapon.pickWeapon();
+		String oWeapon = opponentWeapon.toString();
+		int oImage = R.drawable.choose_gray;
+
+		if (oWeapon == "ROCK") {
+			oImage = R.drawable.arrows_rock;
+		} else if (oWeapon == "LIZARD") {
+			oImage = R.drawable.arrows_lizard;
+		} else if (oWeapon == "SPOCK") {
+			oImage = R.drawable.arrows_spock;
+		} else if (oWeapon == "PAPER") {
+			oImage = R.drawable.arrows_paper;
+		} else if (oWeapon == "SCISSORS") {
+			oImage = R.drawable.arrows_scissors;
+		}
+		if (oImage > 0) {
+			ivO.setImageResource(oImage);
+		}
+
+		tvOpponent.setText("Android chooses "
+				+ oWeapon);
+
+		expandOpponent();
+
+	}
+
+	public void expandOpponent() {
+		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+				R.animator.property_x_to_left);
+		animA.setTarget(rlPlayspace);
+		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+				R.animator.property_x_to_right);
+		animB.setTarget(rlOpponent);
+		
+		AnimatorSet anim1 = new AnimatorSet();
+		anim1.playTogether(animA, animB);
+
+		AnimatorSet anim3 = new AnimatorSet();
+		anim3.playTogether(
+				ObjectAnimator.ofFloat(ivO, "alpha", 1.0f).setDuration(0),
+				ObjectAnimator.ofFloat(tvOpponent, "alpha", 1.0f)
+						.setDuration(0),
+				ObjectAnimator.ofFloat(ivO, "rotationBy", 0.0f).setDuration(
+						1000));
+
+		AnimatorSet set = new AnimatorSet();
+		set.playSequentially(anim1,
+				ObjectAnimator.ofFloat(ivOpponentGray, "rotation", 720.0f)
+						.setDuration(3000), anim3);
+		set.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+
+				Intent i = new Intent(getApplicationContext(),
+						WinActivity.class);
+				i.putExtra("myWeapon", myWeapon);
+				i.putExtra("opponentWeapon", opponentWeapon.toString());
+				startActivity(i);
+				overridePendingTransition(R.anim.fade_in, R.anim.stay);
+				finish();
+			}
+		});
+		set.start();
 	}
 
 	public int getHotspotColor(int hotspotId, int x, int y) {
@@ -133,28 +228,5 @@ public class OnePActivity extends Activity {
 		Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
 		img.setDrawingCacheEnabled(false);
 		return hotspots.getPixel(x, y);
-	}
-
-	public void onFight(View v) {
-		Weapon opponentWeapon = Weapon.pickWeapon();
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.toast_layout,
-		                               (ViewGroup) findViewById(R.id.llToast));
-
-		TextView text = (TextView) layout.findViewById(R.id.tvToast);
-		text.setText("You choose " + myWeapon + ". \nAndroid chooses "
-				+ opponentWeapon.toString() + ".");
-
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		toast.setDuration(Toast.LENGTH_SHORT);
-		toast.setView(layout);
-		toast.show();
-
-		Intent i = new Intent(getApplicationContext(), WinActivity.class);
-		i.putExtra("myWeapon", myWeapon);
-		i.putExtra("opponentWeapon", opponentWeapon.toString());
-		startActivity(i);
-		finish();
 	}
 }

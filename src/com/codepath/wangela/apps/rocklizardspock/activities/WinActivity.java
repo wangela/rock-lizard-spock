@@ -54,6 +54,7 @@ public class WinActivity extends Activity {
             case R.id.miRules:
                 Intent intent = new Intent(this, RulesActivity.class);
                 startActivity(intent);
+    			overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

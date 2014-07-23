@@ -66,6 +66,7 @@ public class TwoPPassActivity extends OnePActivity {
             case R.id.miRules:
                 Intent intent = new Intent(this, RulesActivity.class);
                 startActivity(intent);
+    			overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -225,6 +226,7 @@ public class TwoPPassActivity extends OnePActivity {
 		i.putExtra("opponentWeapon", opponentWeapon);
 		i.putExtra("playMode", "pass");
 		startActivity(i);
+		overridePendingTransition(R.anim.fade_in, R.anim.stay);
 		finish();
 	}
 }
