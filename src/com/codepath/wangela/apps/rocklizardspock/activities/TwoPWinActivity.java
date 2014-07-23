@@ -1,7 +1,17 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,14 +19,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.wangela.apps.rocklizardspock.R;
+import com.codepath.wangela.apps.rocklizardspock.models.OpenGraphUtils.RLSAction;
+import com.codepath.wangela.apps.rocklizardspock.models.OpenGraphUtils.RLSWeapon;
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.SessionDefaultAudience;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphUser;
+import com.facebook.model.GraphObject;
+import com.facebook.model.OpenGraphAction;
+import com.facebook.model.OpenGraphObject;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
@@ -27,11 +43,13 @@ public class TwoPWinActivity extends WinActivity {
 	private String playMode;
 	private String outcome;
 	private String winRule;
+	private String winVerb;
 	private TextView tvOutcome;
 	private TextView tvWinRule;
 	private int nextImage;
 	private ImageView ivOutcome;
 	private UiLifecycleHelper uiHelper;
+	private Activity myActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,189 +61,10 @@ public class TwoPWinActivity extends WinActivity {
 		pickWinner();
 		setupViews();
 
+		myActivity = this;
+
 		uiHelper = new UiLifecycleHelper(this, null);
 		uiHelper.onCreate(savedInstanceState);
-	}
-
-	private void pickWinner() {
-		switch (myWeapon) {
-		case "SPOCK":
-			switch (opponentWeapon) {
-			case "SPOCK":
-				outcome = "tie";
-				winRule = "SPOCK matches SPOCK";
-				nextImage = R.drawable.choose;
-				break;
-			case "LIZARD":
-				outcome = "lose";
-				winRule = "LIZARD poisons SPOCK";
-				nextImage = R.drawable.lose_spock_lizard;
-				break;
-			case "PAPER":
-				outcome = "lose";
-				winRule = "PAPER disproves SPOCK";
-				nextImage = R.drawable.lose_spock_paper;
-				break;
-			case "ROCK":
-				outcome = "win";
-				winRule = "SPOCK vaporizes ROCK";
-				nextImage = R.drawable.win_spock_rock;
-				break;
-			case "SCISSORS":
-				outcome = "win";
-				winRule = "SPOCK smashes SCISSORS";
-				nextImage = R.drawable.win_spock_scissors;
-				break;
-			default:
-				outcome = "tie";
-				winRule = "NOTHING matches NOTHING";
-				nextImage = R.drawable.choose;
-				break;
-			}
-			break;
-		case "LIZARD":
-			switch (opponentWeapon) {
-			case "SPOCK":
-				outcome = "win";
-				winRule = "LIZARD poisons SPOCK";
-				nextImage = R.drawable.win_lizard_spock;
-				break;
-			case "LIZARD":
-				outcome = "tie";
-				winRule = "LIZARD matches LIZARD";
-				nextImage = R.drawable.choose;
-				break;
-			case "PAPER":
-				outcome = "win";
-				winRule = "LIZARD eats PAPER";
-				nextImage = R.drawable.win_lizard_paper;
-				break;
-			case "ROCK":
-				outcome = "lose";
-				winRule = "ROCK crushes LIZARD";
-				nextImage = R.drawable.lose_lizard_rock;
-				break;
-			case "SCISSORS":
-				outcome = "lose";
-				winRule = "SCISSORS decapitate LIZARD";
-				nextImage = R.drawable.lose_lizard_scissors;
-				break;
-			default:
-				outcome = "tie";
-				winRule = "NOTHING matches NOTHING";
-				nextImage = R.drawable.choose;
-				break;
-			}
-			break;
-		case "ROCK":
-			switch (opponentWeapon) {
-			case "SPOCK":
-				outcome = "lose";
-				winRule = "SPOCK vaporizes ROCK";
-				nextImage = R.drawable.lose_rock_spock;
-				break;
-			case "LIZARD":
-				outcome = "win";
-				winRule = "ROCK crushes LIZARD";
-				nextImage = R.drawable.win_rock_lizard;
-				break;
-			case "PAPER":
-				outcome = "lose";
-				winRule = "PAPER covers ROCK";
-				nextImage = R.drawable.lose_rock_paper;
-				break;
-			case "ROCK":
-				outcome = "tie";
-				winRule = "ROCK matches ROCK";
-				nextImage = R.drawable.choose;
-				break;
-			case "SCISSORS":
-				outcome = "win";
-				winRule = "ROCK crushes SCISSORS";
-				nextImage = R.drawable.win_rock_scissors;
-				break;
-			default:
-				outcome = "tie";
-				winRule = "NOTHING matches NOTHING";
-				nextImage = R.drawable.choose;
-				break;
-			}
-			break;
-		case "PAPER":
-			switch (opponentWeapon) {
-			case "SPOCK":
-				outcome = "win";
-				winRule = "PAPER disproves SPOCK";
-				nextImage = R.drawable.win_paper_spock;
-				break;
-			case "LIZARD":
-				outcome = "lose";
-				winRule = "LIZARD eats PAPER";
-				nextImage = R.drawable.lose_paper_lizard;
-				break;
-			case "PAPER":
-				outcome = "tie";
-				winRule = "PAPER matches PAPER";
-				nextImage = R.drawable.choose;
-				break;
-			case "ROCK":
-				outcome = "win";
-				winRule = "PAPER covers ROCK";
-				nextImage = R.drawable.win_paper_rock;
-				break;
-			case "SCISSORS":
-				outcome = "lose";
-				winRule = "SCISSORS cut PAPER";
-				nextImage = R.drawable.lose_paper_scissors;
-				break;
-			default:
-				outcome = "tie";
-				winRule = "NOTHING matches NOTHING";
-				nextImage = R.drawable.choose;
-				break;
-			}
-			break;
-		case "SCISSORS":
-			switch (opponentWeapon) {
-			case "SPOCK":
-				outcome = "lose";
-				winRule = "SPOCK smashes SCISSORS";
-				nextImage = R.drawable.lose_scissors_spock;
-				break;
-			case "LIZARD":
-				outcome = "win";
-				winRule = "SCISSORS decapitate LIZARD";
-				nextImage = R.drawable.win_scissors_lizard;
-				break;
-			case "PAPER":
-				outcome = "win";
-				winRule = "SCISSORS cut PAPER";
-				nextImage = R.drawable.win_scissors_paper;
-				break;
-			case "ROCK":
-				outcome = "lose";
-				winRule = "ROCK crushes SCISSORS";
-				nextImage = R.drawable.lose_scissors_rock;
-				break;
-			case "SCISSORS":
-				outcome = "tie";
-				winRule = "SCISSORS matches SCISSORS";
-				nextImage = R.drawable.choose;
-				break;
-			default:
-				outcome = "tie";
-				winRule = "NOTHING matches NOTHING";
-				nextImage = R.drawable.choose;
-				break;
-			}
-			break;
-		default:
-			outcome = "tie";
-			winRule = "NOTHING matches NOTHING";
-			nextImage = R.drawable.choose;
-			break;
-		}
-
 	}
 
 	private void setupViews() {
@@ -254,6 +93,218 @@ public class TwoPWinActivity extends WinActivity {
 		ivOutcome.setVisibility(ImageView.VISIBLE);
 	}
 
+	private void pickWinner() {
+		switch (myWeapon) {
+		case "SPOCK":
+			switch (opponentWeapon) {
+			case "SPOCK":
+				outcome = "tie";
+				winRule = "SPOCK matches SPOCK";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			case "LIZARD":
+				outcome = "lose";
+				winRule = "LIZARD poisons SPOCK";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_spock_lizard;
+				break;
+			case "PAPER":
+				outcome = "lose";
+				winRule = "PAPER disproves SPOCK";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_spock_paper;
+				break;
+			case "ROCK":
+				outcome = "win";
+				winRule = "SPOCK vaporizes ROCK";
+				winVerb = "vaporize";
+				nextImage = R.drawable.win_spock_rock;
+				break;
+			case "SCISSORS":
+				outcome = "win";
+				winRule = "SPOCK smashes SCISSORS";
+				winVerb = "win";
+				nextImage = R.drawable.win_spock_scissors;
+				break;
+			default:
+				outcome = "tie";
+				winRule = "NOTHING matches NOTHING";
+				winVerb = "win";
+				nextImage = R.drawable.choose;
+				break;
+			}
+			break;
+		case "LIZARD":
+			switch (opponentWeapon) {
+			case "SPOCK":
+				outcome = "win";
+				winRule = "LIZARD poisons SPOCK";
+				winVerb = "poison";
+				nextImage = R.drawable.win_lizard_spock;
+				break;
+			case "LIZARD":
+				outcome = "tie";
+				winRule = "LIZARD matches LIZARD";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			case "PAPER":
+				outcome = "win";
+				winRule = "LIZARD eats PAPER";
+				winVerb = "win";
+				nextImage = R.drawable.win_lizard_paper;
+				break;
+			case "ROCK":
+				outcome = "lose";
+				winRule = "ROCK crushes LIZARD";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_lizard_rock;
+				break;
+			case "SCISSORS":
+				outcome = "lose";
+				winRule = "SCISSORS decapitate LIZARD";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_lizard_scissors;
+				break;
+			default:
+				outcome = "tie";
+				winRule = "NOTHING matches NOTHING";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			}
+			break;
+		case "ROCK":
+			switch (opponentWeapon) {
+			case "SPOCK":
+				outcome = "lose";
+				winRule = "SPOCK vaporizes ROCK";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_rock_spock;
+				break;
+			case "LIZARD":
+				outcome = "win";
+				winRule = "ROCK crushes LIZARD";
+				winVerb = "crush";
+				nextImage = R.drawable.win_rock_lizard;
+				break;
+			case "PAPER":
+				outcome = "lose";
+				winRule = "PAPER covers ROCK";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_rock_paper;
+				break;
+			case "ROCK":
+				outcome = "tie";
+				winRule = "ROCK matches ROCK";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			case "SCISSORS":
+				outcome = "win";
+				winRule = "ROCK crushes SCISSORS";
+				winVerb = "crush";
+				nextImage = R.drawable.win_rock_scissors;
+				break;
+			default:
+				outcome = "tie";
+				winRule = "NOTHING matches NOTHING";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			}
+			break;
+		case "PAPER":
+			switch (opponentWeapon) {
+			case "SPOCK":
+				outcome = "win";
+				winRule = "PAPER disproves SPOCK";
+				winVerb = "disprove";
+				nextImage = R.drawable.win_paper_spock;
+				break;
+			case "LIZARD":
+				outcome = "lose";
+				winRule = "LIZARD eats PAPER";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_paper_lizard;
+				break;
+			case "PAPER":
+				outcome = "tie";
+				winRule = "PAPER matches PAPER";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			case "ROCK":
+				outcome = "win";
+				winRule = "PAPER covers ROCK";
+				winVerb = "win";
+				nextImage = R.drawable.win_paper_rock;
+				break;
+			case "SCISSORS":
+				outcome = "lose";
+				winRule = "SCISSORS cut PAPER";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_paper_scissors;
+				break;
+			default:
+				outcome = "tie";
+				winRule = "NOTHING matches NOTHING";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			}
+			break;
+		case "SCISSORS":
+			switch (opponentWeapon) {
+			case "SPOCK":
+				outcome = "lose";
+				winRule = "SPOCK smashes SCISSORS";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_scissors_spock;
+				break;
+			case "LIZARD":
+				outcome = "win";
+				winRule = "SCISSORS decapitate LIZARD";
+				winVerb = "decapitate";
+				nextImage = R.drawable.win_scissors_lizard;
+				break;
+			case "PAPER":
+				outcome = "win";
+				winRule = "SCISSORS cut PAPER";
+				winVerb = "win";
+				nextImage = R.drawable.win_scissors_paper;
+				break;
+			case "ROCK":
+				outcome = "lose";
+				winRule = "ROCK crushes SCISSORS";
+				winVerb = "lose";
+				nextImage = R.drawable.lose_scissors_rock;
+				break;
+			case "SCISSORS":
+				outcome = "tie";
+				winRule = "SCISSORS matches SCISSORS";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			default:
+				outcome = "tie";
+				winRule = "NOTHING matches NOTHING";
+				winVerb = "tie";
+				nextImage = R.drawable.choose;
+				break;
+			}
+			break;
+		default:
+			outcome = "tie";
+			winRule = "NOTHING matches NOTHING";
+			winVerb = "tie";
+			nextImage = R.drawable.choose;
+			break;
+		}
+
+	}
+
 	@Override
 	public void onAgain(View v) {
 		ivOutcome.setVisibility(ImageView.INVISIBLE);
@@ -269,46 +320,93 @@ public class TwoPWinActivity extends WinActivity {
 
 	}
 
-	public void onShare(View v) {
+	public void onLogin(View v) {
 
-		// start Facebook Login
-		Session.openActiveSession(this, true, new Session.StatusCallback() {
-
-			// callback when session changes state
-			@Override
-			public void call(Session session, SessionState state,
-					Exception exception) {
-				if (session.isOpened()) {
-
-					// make request to the /me API
-					Request.newMeRequest(session,
-							new Request.GraphUserCallback() {
-
-								// callback after Graph API response with user
-								// object
-								@Override
-								public void onCompleted(GraphUser user,
-										Response response) {
-									if (user != null) {
-										TextView welcome = (TextView) findViewById(R.id.welcome);
-										welcome.setText("Hello "
-												+ user.getName() + "!");
-										Toast.makeText(
-												getApplicationContext(),
-												"Hello " + user.getName() + "!",
-												Toast.LENGTH_SHORT).show();
-									}
-								}
-							}).executeAsync();
-				}
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(
+					"com.codepath.wangela.apps.rocklizardspock",
+					PackageManager.GET_SIGNATURES);
+			for (Signature signature : info.signatures) {
+				MessageDigest md = MessageDigest.getInstance("SHA");
+				md.update(signature.toByteArray());
+				TextView welcome = (TextView) findViewById(R.id.welcome);
+				welcome.setText("KeyHash:"
+						+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
 			}
-		});
+		} catch (NameNotFoundException e) {
+			Toast.makeText(myActivity, "Name not found", Toast.LENGTH_SHORT)
+					.show();
 
-		if (FacebookDialog.canPresentShareDialog(getApplicationContext(),
+		} catch (NoSuchAlgorithmException e) {
+			Toast.makeText(myActivity, "No such algorithm", Toast.LENGTH_SHORT)
+					.show();
+
+		}
+	}
+
+	private Session.StatusCallback newPermissionsCallback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {
+			if (exception != null || !session.isOpened()
+					|| !session.getPermissions().contains("publish_actions")) {
+				// this means the user has not granted us permissions, so we
+				// will not create a post
+			} else {
+				composeSharePost();
+			}
+		}
+	};
+
+	public void onShare(View v) {
+		final Session session = Session.getActiveSession();
+		if (session != null && session.isOpened()
+				&& session.getPermissions().contains("publish_actions")) {
+			composeSharePost();
+		} else if (session != null && session.isOpened()) {
+			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
+					TwoPWinActivity.this, "publish_actions")
+					.setCallback(newPermissionsCallback);
+			session.requestNewPublishPermissions(newPermissionsRequest);
+		} else if (session == null) {
+			Session.openActiveSession(this, true, new Session.StatusCallback() {
+
+				// callback when session changes state
+				@Override
+				public void call(Session session, SessionState state,
+						Exception exception) {
+
+					if (session.isOpened()) {
+						Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
+								myActivity, Arrays.asList("publish_actions"))
+								.setDefaultAudience(
+										SessionDefaultAudience.FRIENDS)
+								.setCallback(newPermissionsCallback);
+						session.requestNewPublishPermissions(newPermissionsRequest);
+					}
+				}
+			});
+		}
+
+		// /* make the API call */
+		// new Request(session, "/{app-link-host-id}", null,
+		// HttpMethod.GET, new Request.Callback() {
+		// public void onCompleted(Response response) {
+		// /* handle the result */
+		// Toast.makeText(getApplicationContext(),
+		// response.getRawResponse(),
+		// Toast.LENGTH_LONG).show();
+		// }
+		// }).executeAsync();
+
+	}
+
+	private void composeSharePost() {
+		if (FacebookDialog.canPresentShareDialog(myActivity,
 				FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
 			// Publish the post using the Share Dialog
 			FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(
-					this)
+					myActivity)
 					.setLink("https://developers.facebook.com/android")
 					.setName("Rock Paper Scissors Lizard Spock")
 					.setCaption("The app for Android devices")
@@ -318,15 +416,78 @@ public class TwoPWinActivity extends WinActivity {
 							"https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-xfp1/t39.2081-0/p128x128/10173502_275529322631924_1885431941_n.png")
 					.build();
 			uiHelper.trackPendingDialogCall(shareDialog.present());
-
 		} else {
 			// Fallback. For example, publish the post using the Feed Dialog
 			publishFeedDialog();
 		}
-
 	}
 
-	@Override
+	private void composeOGSharePost() {
+		if (FacebookDialog.canPresentOpenGraphActionDialog(myActivity,
+				FacebookDialog.OpenGraphActionDialogFeature.OG_ACTION_DIALOG)) {
+			// Publish the post using the Share Dialog
+			FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(
+					myActivity)
+					.setLink("https://developers.facebook.com/android")
+					.setName("Rock Paper Scissors Lizard Spock")
+					.setCaption("The app for Android devices")
+					.setDescription(
+							"This game popularized by television show The Big Bang Theory reduces the chances of a tie by adding two new weapons to the classic game of Rock Paper Scissors.")
+					.setPicture(
+							"https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-xfp1/t39.2081-0/p128x128/10173502_275529322631924_1885431941_n.png")
+					.build();
+
+			OpenGraphAction action = GraphObject.Factory
+					.create(OpenGraphAction.class);
+			action.setType("decapitate");
+			action.setProperty("lizard",
+					"http://samples.ogp.me/276908059160717");
+			OpenGraphObject object = GraphObject.Factory
+					.create(OpenGraphObject.class);
+			object.setType("lizard");
+
+			FacebookDialog openDialog = new FacebookDialog.OpenGraphActionDialogBuilder(
+					this, action, "lizard").build();
+			uiHelper.trackPendingDialogCall(openDialog.present());
+		}
+		//
+
+		if (winVerb == "lose" || winVerb == "tie" || winVerb == "win") {
+			opponentWeapon = "round";
+		}
+
+		RLSWeapon rlsWeapon = createRlsWeapon(opponentWeapon);
+		RLSAction rlsAction = createRlsAction(winVerb);
+
+		FacebookDialog.OpenGraphActionDialogBuilder builder = new FacebookDialog.OpenGraphActionDialogBuilder(
+				myActivity, rlsAction, rlsAction.PREVIEW_PROPERTY_NAME);
+
+		// share the game play
+		if (builder.canPresent()) {
+			builder.build().present();
+			//
+			// } else {
+			// // Fallback. For example, publish the post using the Feed Dialog
+			// publishFeedDialog();
+			// }
+		}
+	}
+
+	private RLSWeapon createRlsWeapon(String type) {
+		RLSWeapon weapon = OpenGraphObject.Factory.createForPost(
+				RLSWeapon.class, opponentWeapon);
+		weapon.setProperty("TYPE", "objects/rock-lizard-spock:" + type);
+		return weapon;
+	}
+
+	private RLSAction createRlsAction(String verb) {
+		RLSAction action = OpenGraphAction.Factory.createForPost(
+				RLSAction.class, verb);
+		action.setProperty("TYPE", "rock-lizard-spock:" + verb);
+		action.setProperty("PATH", "me/" + action.TYPE);
+		return action;
+	}
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -374,7 +535,7 @@ public class TwoPWinActivity extends WinActivity {
 
 	private void publishFeedDialog() {
 		Bundle params = new Bundle();
-		params.putString("name", "Rock Paper Scissors Lizard Spock - the App");
+		params.putString("name", "Rock Paper Scissors Lizard Spock");
 		params.putString("caption", "The app for Android devices");
 		params.putString(
 				"description",
@@ -417,8 +578,8 @@ public class TwoPWinActivity extends WinActivity {
 									.show();
 						}
 					}
-
 				}).build();
 		feedDialog.show();
 	}
+
 }

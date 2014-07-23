@@ -61,10 +61,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:onClick="onLogin"
         android:text="@string/login" />
 
     <TextView
         android:id="@+id/welcome"
+        android:typeface="serif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
