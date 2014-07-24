@@ -26,9 +26,10 @@ This is an app for Android mobile devices to play rock-paper-scissors-lizard-Spo
  * [x] When viewing Rules screen, user can click "back" to return to previous screen with saved state if play was in progress
 
 ## Stretch:
- * [ ] User can click button on Outcome page to share status on Facebook “We just played Rock-Paper-Scissors-Lizard-Spock to decide…” with link to game webpage
- * [ ] User can log in to Facebook account using OAuth
- * [ ] User can edit status message before posting to Facebook with default post visibility
+ * [x] User can click button on Outcome page to share status on Facebook “We just played Rock-Paper-Scissors-Lizard-Spock to decide…” with link to Play store listing
+ * [x] User can log in to Facebook account using OAuth
+ * [x] User can edit status message before posting to Facebook with desired post visibility
+ * [ ] Facebook status update has fun Open Graph stories like "Jane Doe decapitated a lizard in Rock Paper Scissors Lizard Spock"
  * [ ] User hears different sound effects for Win, Lose, and Draw outcomes
  * [ ] User sees a countdown of limited time to lock in his choice or else the current choice gets locked in
  * [ ] User can set preferences (sound on/off, player name, limited time mode)
@@ -50,6 +51,12 @@ GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 One interesting challenge of building this app was to make the graphic of five clickable weapons scale to the many screen sizes found with Android devices. Simply placing the weapon circles as image buttons in a relative layout would subject them to unpredictable scaling behavior, breaking the nice symmetry of the pentagon shape when encountering wider or taller screen proportions.
 
 To account for this, I used an invisible hotspot image underlay with color-coded hotspots (credit to [Bill Lahti for his instructional tutorial](http://blahti.wordpress.com/2012/06/26/images-with-clickable-areas/) of this method). The hotspot image will scale exactly with the visible weapons image, and incurs minimal graphical overhead (the hotspot image is under 2 KB in filesize).
+
+**Complex animations**  
+Scaling view animations based on screen size turned out to be challenging. Property animations don't support percentage-based scaling out-of-the-box so I had the option to create a custom view with new getters and setters and calculating display dimensions using getSize of the display, but I decided to go with tween-based animation instead. I had a lot of debugging to do with alphas, which are finicky (if you set the alpha to 0 in your layout XML, it won't be visible during animation even if your animation includes an alpha animation that brings alpha to 1.0).
+
+**Facebook SDK**  
+The Facebook SDK documentation leaves much to be desired. I was able to implement login and sharing an update, but when trying to implement OpenGraph stories and AppLinks for deep linking to the app, I hit a lot of dead ends and will need to find documentation outside Facebook.
 
 **Sticky Item in a ScrollView**  
 Another UX feature I wanted was for the Rules page. I wanted the five-weapon graphic to stay visible on screen no matter how far down in the rules the user has scrolled. Although there are only 10 rules, they tend to extend off screen for most smartphones, and even if the user was viewing the last rule I wanted him to be able to refer to the diagram.
