@@ -18,17 +18,16 @@
         android:text="@string/choose_your_weapon" />
 
     <RelativeLayout
-        android:id="@+id/rlOpponent"
+        android:id="@+id/srlOpponent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvChoose"
-        android:alpha="0"
         android:background="@color/black" >
 
         <FrameLayout
             android:id="@+id/flOpponent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="450dp"
             android:background="@color/black" >
 
             <ImageView
@@ -48,7 +47,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:alpha="0"
-                android:src="@drawable/choose" />
+                android:src="@drawable/choose_gray" />
         </FrameLayout>
 
         <TextView
@@ -64,7 +63,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rlPlayspace"
+        android:id="@+id/srlPlayspace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvChoose"
@@ -73,8 +72,8 @@
 
         <FrameLayout
             android:id="@+id/flPlayspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="450dp" >
 
             <ImageView
                 android:id="@+id/ivHotspots"
@@ -123,7 +122,7 @@
         style="@style/FightButton.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rlPlayspace"
+        android:layout_below="@id/srlPlayspace"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:onClick="onFight"

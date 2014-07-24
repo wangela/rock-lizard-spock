@@ -14,6 +14,15 @@
         android:layout_marginTop="20dp"
         android:text="@string/you_win" />
 
+    <TextView
+        android:id="@+id/tvTWinRule"
+        style="@style/LightText.Instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="@string/win_rule" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="300dp" >
@@ -37,14 +46,6 @@
             android:visibility="invisible" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvTWinRule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="@string/win_rule" />
-
     <Button
         android:id="@+id/btnTAgain"
         style="@style/FightButton"
@@ -53,23 +54,6 @@
         android:layout_gravity="center"
         android:onClick="onAgain"
         android:text="@string/again" />
-
-    <Button
-        android:id="@+id/btnTLogin"
-        style="@style/FightButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:onClick="onLogin"
-        android:text="@string/login" />
-
-    <TextView
-        android:id="@+id/welcome"
-        android:typeface="serif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
     <Button
         android:id="@+id/btnTShare"

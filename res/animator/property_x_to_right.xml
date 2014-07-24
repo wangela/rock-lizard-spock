@@ -13,7 +13,11 @@
     <objectAnimator
         android:duration="3000"
         android:propertyName="translationX"
+        android:valueTo="200.0" />
+    <objectAnimator 
+        android:duration="3000"
+        android:propertyName="alpha"
         android:valueFrom="0.0"
-        android:valueTo="300.0" />
+        android:valueTo="1.0"/>
 
 </set>

@@ -11,6 +11,7 @@
         style="@style/LightText.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -44,7 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/hotspots"
                 android:visibility="invisible" />
 
@@ -80,7 +82,7 @@
 
         <FrameLayout
             android:id="@+id/flPPlayspace"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="300dp" >
 
             <ImageView

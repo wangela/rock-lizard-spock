@@ -1,17 +1,10 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,9 +16,6 @@ import com.codepath.wangela.apps.rocklizardspock.models.OpenGraphUtils.RLSAction
 import com.codepath.wangela.apps.rocklizardspock.models.OpenGraphUtils.RLSWeapon;
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionDefaultAudience;
 import com.facebook.SessionState;
@@ -66,6 +56,7 @@ public class TwoPWinActivity extends WinActivity {
 		uiHelper = new UiLifecycleHelper(this, null);
 		uiHelper.onCreate(savedInstanceState);
 	}
+
 
 	private void setupViews() {
 		tvOutcome = (TextView) findViewById(R.id.tvTOutcome);
@@ -320,29 +311,29 @@ public class TwoPWinActivity extends WinActivity {
 
 	}
 
-	public void onLogin(View v) {
-
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(
-					"com.codepath.wangela.apps.rocklizardspock",
-					PackageManager.GET_SIGNATURES);
-			for (Signature signature : info.signatures) {
-				MessageDigest md = MessageDigest.getInstance("SHA");
-				md.update(signature.toByteArray());
-				TextView welcome = (TextView) findViewById(R.id.welcome);
-				welcome.setText("KeyHash:"
-						+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
-			}
-		} catch (NameNotFoundException e) {
-			Toast.makeText(myActivity, "Name not found", Toast.LENGTH_SHORT)
-					.show();
-
-		} catch (NoSuchAlgorithmException e) {
-			Toast.makeText(myActivity, "No such algorithm", Toast.LENGTH_SHORT)
-					.show();
-
-		}
-	}
+//	public void onLogin(View v) {
+//
+//		try {
+//			PackageInfo info = getPackageManager().getPackageInfo(
+//					"com.codepath.wangela.apps.rocklizardspock",
+//					PackageManager.GET_SIGNATURES);
+//			for (Signature signature : info.signatures) {
+//				MessageDigest md = MessageDigest.getInstance("SHA");
+//				md.update(signature.toByteArray());
+//				TextView welcome = (TextView) findViewById(R.id.welcome);
+//				welcome.setText("KeyHash:"
+//						+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//			}
+//		} catch (NameNotFoundException e) {
+//			Toast.makeText(myActivity, "Name not found", Toast.LENGTH_SHORT)
+//					.show();
+//
+//		} catch (NoSuchAlgorithmException e) {
+//			Toast.makeText(myActivity, "No such algorithm", Toast.LENGTH_SHORT)
+//					.show();
+//
+//		}
+//	}
 
 	private Session.StatusCallback newPermissionsCallback = new Session.StatusCallback() {
 		@Override

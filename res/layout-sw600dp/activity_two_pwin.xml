@@ -6,8 +6,8 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvOutcome"
-        style="@style/WinText"
+        android:id="@+id/tvTOutcome"
+        style="@style/WinText.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -15,45 +15,54 @@
         android:text="@string/you_win" />
 
     <TextView
-        android:id="@+id/tvWinRule"
-        style="@style/LightText.Instruction"
+        android:id="@+id/tvTWinRule"
+        style="@style/LightText.Large.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:text="@string/win_rule" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp" >
+        android:layout_height="450dp" >
 
         <ImageView
-            android:id="@+id/ivWinGray"
+            android:id="@+id/ivTWinGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_margin="20dp"
             android:src="@drawable/choose_gray" />
 
         <ImageView
-            android:id="@+id/ivWinImage"
+            android:id="@+id/ivTWinImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/choose_gray"
+            android:layout_margin="20dp"
+            android:src="@drawable/win_spock_scissors"
+            android:tag="SPOCK_SCISSORS"
             android:visibility="invisible" />
     </FrameLayout>
 
     <Button
-        android:id="@+id/btnAgain"
-        style="@style/FightButton"
+        android:id="@+id/btnTAgain"
+        style="@style/FightButton.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onAgain"
         android:text="@string/again" />
+
+    <Button
+        android:id="@+id/btnTShare"
+        style="@style/FightButton.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:onClick="onShare"
+        android:text="@string/share" />
 
 </LinearLayout>

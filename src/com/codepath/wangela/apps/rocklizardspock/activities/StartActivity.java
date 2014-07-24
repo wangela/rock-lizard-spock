@@ -58,6 +58,7 @@ public class StartActivity extends Activity {
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 	
 	public void onTwoPlayer(View v) {
@@ -67,5 +68,6 @@ public class StartActivity extends Activity {
 		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 }

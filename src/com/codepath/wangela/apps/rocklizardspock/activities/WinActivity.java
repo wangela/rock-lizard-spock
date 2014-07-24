@@ -1,11 +1,5 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
-import com.codepath.wangela.apps.rocklizardspock.R;
-import com.codepath.wangela.apps.rocklizardspock.R.drawable;
-import com.codepath.wangela.apps.rocklizardspock.R.id;
-import com.codepath.wangela.apps.rocklizardspock.R.layout;
-import com.codepath.wangela.apps.rocklizardspock.R.menu;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.codepath.wangela.apps.rocklizardspock.R;
 
 public class WinActivity extends Activity {
 	private String myWeapon;
@@ -50,6 +46,7 @@ public class WinActivity extends Activity {
                 Intent i = new Intent(this, StartActivity.class);
                 startActivity(i);
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             case R.id.miRules:
                 Intent intent = new Intent(this, RulesActivity.class);
@@ -59,6 +56,13 @@ public class WinActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+	
+    @Override
+    public void onBackPressed() {
+    	finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
     
 	private void pickWinner() {

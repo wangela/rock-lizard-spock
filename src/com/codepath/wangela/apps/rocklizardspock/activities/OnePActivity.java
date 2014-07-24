@@ -1,13 +1,11 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,10 +15,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 import com.codepath.wangela.apps.rocklizardspock.R;
 import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
@@ -36,6 +38,7 @@ public class OnePActivity extends Activity {
 	private int nextImage = 0;
 	private TextView tvChoice;
 	private TextView tvOpponent;
+	private TextView tvChoose;
 	private Button btnFight;
 	private String myWeapon;
 	Weapon opponentWeapon;
@@ -68,6 +71,7 @@ public class OnePActivity extends Activity {
 			Intent i = new Intent(this, StartActivity.class);
 			startActivity(i);
 			finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 			return true;
 		case R.id.miRules:
 			Intent intent = new Intent(this, RulesActivity.class);
@@ -78,16 +82,24 @@ public class OnePActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+    @Override
+    public void onBackPressed() {
+    	finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    
 
 	private void setupViews() {
-		rlPlayspace = (RelativeLayout) findViewById(R.id.rlPlayspace);
-		rlOpponent = (RelativeLayout) findViewById(R.id.rlOpponent);
+		rlPlayspace = (RelativeLayout) findViewById(R.id.srlPlayspace);
+		rlOpponent = (RelativeLayout) findViewById(R.id.srlOpponent);
 		ivGray = (ImageView) findViewById(R.id.ivChooseGray);
+		ivOpponentGray = (ImageView) findViewById(R.id.ivOpponentChooseGray);
 		arrows = (ImageView) findViewById(R.id.ivArrows);
 		oArrows = (ImageView) findViewById(R.id.ivOpponentArrows);
-		tvOpponent = (TextView) findViewById(R.id.tvOpponent);
-		ivOpponentGray = (ImageView) findViewById(R.id.ivOpponentChooseGray);
 		tvChoice = (TextView) findViewById(R.id.tvChoice);
+		tvOpponent = (TextView) findViewById(R.id.tvOpponent);
+		tvChoose = (TextView) findViewById(R.id.tvChoose);
 		btnFight = (Button) findViewById(R.id.btnFight);
 
 		ivGray.setOnTouchListener(new OnTouchListener() {
@@ -152,6 +164,7 @@ public class OnePActivity extends Activity {
 
 	public void onFight(View v) {
 		btnFight.setVisibility(Button.INVISIBLE);
+		tvChoose.setVisibility(TextView.INVISIBLE);
 		ivGray.setOnTouchListener(null);
 
 		opponentWeapon = Weapon.pickWeapon();
@@ -181,32 +194,24 @@ public class OnePActivity extends Activity {
 	}
 
 	public void expandOpponent() {
-		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
-				R.animator.property_x_to_left);
-		animA.setTarget(rlPlayspace);
-		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
-				R.animator.property_x_to_right);
-		animB.setTarget(rlOpponent);
-		
-		AnimatorSet anim1 = new AnimatorSet();
-		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlOpponent, "alpha", 0.0f, 1.0f).setDuration(3000));
 
-		AnimatorSet anim3 = new AnimatorSet();
+		
+		Animation animScaleLeft = AnimationUtils.loadAnimation(this, R.anim.scale_and_slide_left);
+		final Animation animScaleRight = AnimationUtils.loadAnimation(this, R.anim.scale_and_slide_right);
+		final AnimatorSet anim3 = new AnimatorSet();
 		anim3.playTogether(
 				ObjectAnimator.ofFloat(oArrows, "alpha", 1.0f).setDuration(0),
 				ObjectAnimator.ofFloat(tvOpponent, "alpha", 1.0f)
 						.setDuration(0),
 				ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(
 						1000));
+		anim3.setStartDelay(3000);
+		
 
-		AnimatorSet set = new AnimatorSet();
-		set.playSequentially(anim1,
-				ObjectAnimator.ofFloat(ivOpponentGray, "rotation", 720.0f)
-						.setDuration(3000), anim3);
-		set.addListener(new AnimatorListenerAdapter() {
+		
+		anim3.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator animation) {
-
 				Intent i = new Intent(getApplicationContext(),
 						WinActivity.class);
 				i.putExtra("myWeapon", myWeapon);
@@ -216,7 +221,64 @@ public class OnePActivity extends Activity {
 				finish();
 			}
 		});
-		set.start();
+		
+		animScaleLeft.setAnimationListener(new AnimationListener() {
+		    @Override
+		    public void onAnimationStart(Animation animation) {
+		        // Fires when animation starts
+		    	rlOpponent.startAnimation(animScaleRight);
+		    }
+		
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				animate(ivOpponentGray).rotation(720.0f).setDuration(3000);
+				anim3.start();
+			}
+			
+		    @Override
+		    public void onAnimationRepeat(Animation animation) {		
+		    }
+		});
+		
+
+		rlPlayspace.startAnimation(animScaleLeft);
+		
+//		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+//				R.animator.property_x_to_left);
+//		animA.setTarget(rlPlayspace);
+//		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+//				R.animator.property_x_to_right);
+//		animB.setTarget(rlOpponent);
+//		
+//		AnimatorSet anim1 = new AnimatorSet();
+//		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlOpponent, "alpha", 0.0f, 1.0f).setDuration(3000));
+//
+//		AnimatorSet anim3 = new AnimatorSet();
+//		anim3.playTogether(
+//				ObjectAnimator.ofFloat(oArrows, "alpha", 1.0f).setDuration(0),
+//				ObjectAnimator.ofFloat(tvOpponent, "alpha", 1.0f)
+//						.setDuration(0),
+//				ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(
+//						1000));
+//
+//		AnimatorSet set = new AnimatorSet();
+//		set.playSequentially(anim1,
+//				ObjectAnimator.ofFloat(ivOpponentGray, "rotation", 720.0f)
+//						.setDuration(3000), anim3);
+//		set.addListener(new AnimatorListenerAdapter() {
+//			@Override
+//			public void onAnimationEnd(Animator animation) {
+//
+//				Intent i = new Intent(getApplicationContext(),
+//						WinActivity.class);
+//				i.putExtra("myWeapon", myWeapon);
+//				i.putExtra("opponentWeapon", opponentWeapon.toString());
+//				startActivity(i);
+//				overridePendingTransition(R.anim.fade_in, R.anim.stay);
+//				finish();
+//			}
+//		});
+//		set.start();
 	}
 
 	public int getHotspotColor(int hotspotId, int x, int y) {

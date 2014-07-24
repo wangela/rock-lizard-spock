@@ -1,39 +1,23 @@
 package com.codepath.wangela.apps.rocklizardspock.activities;
 
-import com.codepath.wangela.apps.rocklizardspock.R;
-import com.codepath.wangela.apps.rocklizardspock.R.drawable;
-import com.codepath.wangela.apps.rocklizardspock.R.id;
-import com.codepath.wangela.apps.rocklizardspock.R.layout;
-import com.codepath.wangela.apps.rocklizardspock.R.menu;
-import com.codepath.wangela.apps.rocklizardspock.R.string;
-import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
-import com.codepath.wangela.apps.rocklizardspock.models.Weapon;
-
-import android.R.color;
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.codepath.wangela.apps.rocklizardspock.R;
+import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
 
 public class TwoPPassActivity extends OnePActivity {
 	private RelativeLayout rlBackground;
@@ -75,6 +59,7 @@ public class TwoPPassActivity extends OnePActivity {
                 Intent i = new Intent(this, StartActivity.class);
                 startActivity(i);
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             case R.id.miRules:
                 Intent intent = new Intent(this, RulesActivity.class);
@@ -151,8 +136,8 @@ public class TwoPPassActivity extends OnePActivity {
 				if (nextImage > 0) {
 					arrows.setImageResource(nextImage);
 					tvChoice.setText("P1 chooses " + myWeapon);
-					tvChoice.setVisibility(TextView.VISIBLE);
 				}
+				tvChoice.setVisibility(TextView.VISIBLE);
 				btnChoose.setVisibility(Button.VISIBLE);
 				arrows.setVisibility(ImageView.VISIBLE);
 				return true;
@@ -163,7 +148,6 @@ public class TwoPPassActivity extends OnePActivity {
 	public void onChoose(View v) {
 		btnChoose.setVisibility(Button.INVISIBLE);
 		ivGray.setOnTouchListener(null);
-		rlPlayspace.setAlpha(0.0f);
 		rlOpponent.bringToFront();
 		rlOpponent.setAlpha(1.0f);
 		rlBackground.setBackgroundColor(getResources().getColor(R.color.black));
@@ -255,22 +239,18 @@ public class TwoPPassActivity extends OnePActivity {
 		tvChoose.setVisibility(TextView.INVISIBLE);
 		btnFight.setVisibility(Button.INVISIBLE);
 		
-		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
-				R.animator.property_x_to_left);
-		animA.setTarget(rlPlayspace);
-		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
-				R.animator.property_x_to_right);
-		animB.setTarget(rlOpponent);
+		final Animation animScaleLeft = AnimationUtils.loadAnimation(this, R.anim.scale_and_slide_left2);
+		Animation animScaleRight = AnimationUtils.loadAnimation(this,  R.anim.scale_and_slide_right2);
 		
-		AnimatorSet anim1 = new AnimatorSet();
-		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlPlayspace, "alpha", 0.0f, 1.0f).setDuration(3000));
-
-		AnimatorSet set = new AnimatorSet();
-		set.playSequentially(anim1, ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(1000));
-		set.addListener(new AnimatorListenerAdapter() {
+		animScaleRight.setAnimationListener(new AnimationListener() {
+		    @Override
+		    public void onAnimationStart(Animation animation) {
+		        // Fires when animation starts
+				rlPlayspace.startAnimation(animScaleLeft);
+		    }
+		
 			@Override
-			public void onAnimationEnd(Animator animation) {
-
+			public void onAnimationEnd(Animation animation) {
 				Intent i = new Intent(getApplicationContext(),
 						TwoPWinActivity.class);
 				i.putExtra("myWeapon", myWeapon);
@@ -280,8 +260,42 @@ public class TwoPPassActivity extends OnePActivity {
 				overridePendingTransition(R.anim.fade_in, R.anim.stay);
 				finish();
 			}
+			
+		    @Override
+		    public void onAnimationRepeat(Animation animation) {
+		       // ...			
+		    }
 		});
-		set.start();
+		
+		rlOpponent.startAnimation(animScaleRight);
+		
+//		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+//				R.animator.property_x_to_left);
+//		animA.setTarget(rlPlayspace);
+//		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+//				R.animator.property_x_to_right);
+//		animB.setTarget(rlOpponent);
+//		
+//		AnimatorSet anim1 = new AnimatorSet();
+//		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlPlayspace, "alpha", 0.0f, 1.0f).setDuration(3000));
+//
+//		AnimatorSet set = new AnimatorSet();
+//		set.playSequentially(anim1, ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(1000));
+//		set.addListener(new AnimatorListenerAdapter() {
+//			@Override
+//			public void onAnimationEnd(Animator animation) {
+//
+//				Intent i = new Intent(getApplicationContext(),
+//						TwoPWinActivity.class);
+//				i.putExtra("myWeapon", myWeapon);
+//				i.putExtra("opponentWeapon", opponentWeapon);
+//				i.putExtra("playMode", "pass");
+//				startActivity(i);
+//				overridePendingTransition(R.anim.fade_in, R.anim.stay);
+//				finish();
+//			}
+//		});
+//		set.start();
 	}
 
 }
