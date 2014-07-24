@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llPBackground"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlTwoPPass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <TextView
@@ -10,46 +11,125 @@
         style="@style/LightText.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="@string/choose_your_weaponP" />
 
-    <FrameLayout
-        android:id="@+id/flPPlayspace"
+    <RelativeLayout
+        android:id="@+id/rlPOpponent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPChoose"
+        android:alpha="0"
+        android:background="@color/black" >
 
-        <ImageView
-            android:id="@+id/ivPHotspots"
+        <FrameLayout
+            android:id="@+id/flPOpponent"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:background="@color/black" >
+
+            <ImageView
+                android:id="@+id/ivPOpponentChooseGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/choose_gray" />
+
+            <ImageView
+                android:id="@+id/ivPOpponentHotspots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:src="@drawable/hotspots"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ivPOpponentArrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/choose_gray" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvPOpponent"
+            style="@style/LightText.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/hotspots"
+            android:layout_below="@id/flPOpponent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp"
             android:visibility="invisible" />
+    </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPChooseGray"
+    <RelativeLayout
+        android:id="@+id/rlPPlayspace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPChoose"
+        android:background="@color/white"
+        android:gravity="center_horizontal" >
+
+        <FrameLayout
+            android:id="@+id/flPPlayspace"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" >
+
+            <ImageView
+                android:id="@+id/ivPHotspots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/hotspots"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ivPChooseGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/choose_gray" />
+
+            <ImageView
+                android:id="@+id/ivPArrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/choose_gray"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvPChoice"
+            style="@style/LightText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/choose_gray" />
-
-        <ImageView
-            android:id="@+id/ivPArrows"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:src="@drawable/choose_gray"
+            android:layout_below="@id/flPPlayspace"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp"
             android:visibility="invisible" />
-    </FrameLayout>
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/flPButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlPPlayspace" >
 
         <Button
             android:id="@+id/btnPFight"
@@ -74,4 +154,4 @@
             android:visibility="invisible" />
     </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>

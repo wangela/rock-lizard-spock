@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -42,6 +42,17 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>
+    
+        <!-- Button style -->
+    <style name="FightButton.Large" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:background">@drawable/states_fight_button</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
 
     <!-- TextView style -->
     <style name="LightText">
@@ -49,17 +60,19 @@
         <item name="android:textColor">#333333</item>
         <item name="android:textSize">18sp</item>
     </style>
-    
+
     <style name="LightText.Large">
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textColor">#333333</item>
         <item name="android:textSize">36sp</item>
     </style>
 
     <!-- TextView Reverse style -->
     <style name="LightText.White">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">36sp</item>
+    </style>
+    
+        <!-- TextView Reverse style -->
+    <style name="LightText.Large.White">
+        <item name="android:textColor">#ffffff</item>
     </style>
 
     <!-- TextView Instruction style -->
@@ -67,18 +80,33 @@
         <item name="android:textStyle">italic</item>
     </style>
 
+    <!-- TextView Instruction style -->
+    <style name="LightText.Large.Instruction">
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <!-- TextView Header style -->
     <style name="LightText.Header">
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
 
-        <!-- TextView Outcome style -->
+    <!-- TextView Header style -->
+    <style name="LightText.Large.Header">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="WinText">
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textColor">#333333</item>
         <item name="android:textSize">22sp</item>
+    </style>
+    
+        <style name="WinText.Large">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
 </resources>

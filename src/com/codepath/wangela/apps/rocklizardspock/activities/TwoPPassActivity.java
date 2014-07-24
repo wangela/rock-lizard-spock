@@ -7,8 +7,14 @@ import com.codepath.wangela.apps.rocklizardspock.R.layout;
 import com.codepath.wangela.apps.rocklizardspock.R.menu;
 import com.codepath.wangela.apps.rocklizardspock.R.string;
 import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
+import com.codepath.wangela.apps.rocklizardspock.models.Weapon;
 
 import android.R.color;
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,21 +31,28 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TwoPPassActivity extends OnePActivity {
+	private RelativeLayout rlBackground;
+	private RelativeLayout rlPlayspace;
+	private RelativeLayout rlOpponent;
 	private ImageView ivGray;
-	private ImageView iv;
-	private LinearLayout llBackground;
-	private int nextImage;
+	private ImageView ivOpponentGray;
+	private ImageView arrows;
+	private ImageView oArrows;
+	private int nextImage = 0;
+	private int oImage = 0;
+	private TextView tvChoice;
+	private TextView tvOpponent;
+	private TextView tvChoose;
+	private Button btnChoose;
+	private Button btnFight;
 	private String myWeapon;
 	private String opponentWeapon;
-	private TextView tvPass;
-	private Button btnChoose;
-	private Button btnPass;
-	private Button btnFight;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,12 +87,19 @@ public class TwoPPassActivity extends OnePActivity {
     }
 
 	private void setupViews() {
+		rlBackground = (RelativeLayout) findViewById(R.id.rlTwoPPass);
+		rlPlayspace = (RelativeLayout) findViewById(R.id.rlPPlayspace);
+		rlOpponent = (RelativeLayout) findViewById(R.id.rlPOpponent);
+		ivGray = (ImageView) findViewById(R.id.ivPChooseGray);
+		ivOpponentGray = (ImageView) findViewById(R.id.ivPOpponentChooseGray);
+		arrows = (ImageView) findViewById(R.id.ivPArrows);
+		oArrows = (ImageView) findViewById(R.id.ivPOpponentArrows);
+		tvChoice = (TextView) findViewById(R.id.tvPChoice);
+		tvOpponent = (TextView) findViewById(R.id.tvPOpponent);
+		tvChoose = (TextView) findViewById(R.id.tvPChoose);
 		btnChoose = (Button) findViewById(R.id.btnPChoose);
 		btnFight = (Button) findViewById(R.id.btnPFight);
-		tvPass = (TextView) findViewById(R.id.tvPChoose);
-		llBackground = (LinearLayout) findViewById(R.id.llPBackground);
-		iv = (ImageView) findViewById(R.id.ivPArrows);
-		ivGray = (ImageView) findViewById(R.id.ivPChooseGray);
+
 		ivGray.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
@@ -93,7 +113,7 @@ public class TwoPPassActivity extends OnePActivity {
 					// The hidden image (hotspots.png) has five different
 					// hotspots on it.
 					// The colors are red, green, blue, magenta, and yellow.
-					iv.setVisibility(ImageView.INVISIBLE);
+					arrows.setVisibility(ImageView.INVISIBLE);
 					int touchColor = getHotspotColor(R.id.ivPHotspots, evX, evY);
 					// Compare the touchColor to the expected values.
 					// Switch to a different image, depending on what color was
@@ -129,10 +149,12 @@ public class TwoPPassActivity extends OnePActivity {
 					break;
 				} // end switch
 				if (nextImage > 0) {
-					iv.setImageResource(nextImage);
+					arrows.setImageResource(nextImage);
+					tvChoice.setText("P1 chooses " + myWeapon);
+					tvChoice.setVisibility(TextView.VISIBLE);
 				}
 				btnChoose.setVisibility(Button.VISIBLE);
-				iv.setVisibility(ImageView.VISIBLE);
+				arrows.setVisibility(ImageView.VISIBLE);
 				return true;
 			}
 		});
@@ -140,14 +162,16 @@ public class TwoPPassActivity extends OnePActivity {
 
 	public void onChoose(View v) {
 		btnChoose.setVisibility(Button.INVISIBLE);
-		llBackground.setBackgroundColor(getResources().getColor(R.color.black));
-		iv.setImageResource(R.drawable.choose_gray);
-		nextImage = R.drawable.choose_gray;
 		ivGray.setOnTouchListener(null);
-		tvPass.setText(R.string.choose_your_weaponP2);
-		tvPass.setTextColor(getResources().getColor(R.color.white));
+		rlPlayspace.setAlpha(0.0f);
+		rlOpponent.bringToFront();
+		rlOpponent.setAlpha(1.0f);
+		rlBackground.setBackgroundColor(getResources().getColor(R.color.black));
+		oImage = R.drawable.choose_gray;
+		tvChoose.setText(R.string.choose_your_weaponP2);
+		tvChoose.setTextColor(getResources().getColor(R.color.white));
 		
-		ivGray.setOnTouchListener(new OnTouchListener() {
+		ivOpponentGray.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
 				final int action = ev.getAction();
@@ -160,8 +184,8 @@ public class TwoPPassActivity extends OnePActivity {
 					// The hidden image (hotspots.png) has five different
 					// hotspots on it.
 					// The colors are red, green, blue, magenta, and yellow.
-					iv.setVisibility(ImageView.INVISIBLE);
-					int touchColor = getHotspotColor(R.id.ivPHotspots, evX, evY);
+					oArrows.setVisibility(ImageView.INVISIBLE);
+					int touchColor = getHotspotColor(R.id.ivPOpponentHotspots, evX, evY);
 					// Compare the touchColor to the expected values.
 					// Switch to a different image, depending on what color was
 					// touched.
@@ -175,32 +199,34 @@ public class TwoPPassActivity extends OnePActivity {
 					int tolerance = 25;
 					if (ct.closeMatch(Color.RED, touchColor, tolerance)) {
 						// Do the action associated with the RED region
-						nextImage = R.drawable.arrows_rock;
+						oImage = R.drawable.arrows_rock;
 						opponentWeapon = "ROCK";
 					} else if (ct
 							.closeMatch(Color.GREEN, touchColor, tolerance)) {
-						nextImage = R.drawable.arrows_lizard;
+						oImage = R.drawable.arrows_lizard;
 						opponentWeapon = "LIZARD";
 					} else if (ct.closeMatch(Color.BLUE, touchColor, tolerance)) {
-						nextImage = R.drawable.arrows_spock;
+						oImage = R.drawable.arrows_spock;
 						opponentWeapon = "SPOCK";
 					} else if (ct.closeMatch(Color.YELLOW, touchColor,
 							tolerance)) {
-						nextImage = R.drawable.arrows_paper;
+						oImage = R.drawable.arrows_paper;
 						opponentWeapon = "PAPER";
 					} else if (ct.closeMatch(Color.MAGENTA, touchColor,
 							tolerance)) {
-						nextImage = R.drawable.arrows_scissors;
+						oImage = R.drawable.arrows_scissors;
 						opponentWeapon = "SCISSORS";
 					}
 					break;
 				} // end switch
-				if (nextImage > 0) {
-					iv.setImageResource(nextImage);
+				if (oImage > 0) {
+					oArrows.setImageResource(oImage);
+					tvOpponent.setText("P2 chooses " + opponentWeapon);
+					tvOpponent.setVisibility(TextView.VISIBLE);
 				}
 				btnFight.bringToFront();
 				btnFight.setVisibility(Button.VISIBLE);
-				iv.setVisibility(ImageView.VISIBLE);
+				oArrows.setVisibility(ImageView.VISIBLE);
 				return true;
 			}
 		});
@@ -208,25 +234,54 @@ public class TwoPPassActivity extends OnePActivity {
 
 	@Override
 	public void onFight(View v) {
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.toast_layout,
-				(ViewGroup) findViewById(R.id.llToast));
+//		LayoutInflater inflater = getLayoutInflater();
+//		View layout = inflater.inflate(R.layout.toast_layout,
+//				(ViewGroup) findViewById(R.id.llToast));
+//
+//		TextView text = (TextView) layout.findViewById(R.id.tvToast);
+//		text.setText("P1 chose " + myWeapon + ". \nP2 chose " + opponentWeapon + ".");
+//
+//		Toast toast = new Toast(getApplicationContext());
+//		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+//		toast.setDuration(Toast.LENGTH_SHORT);
+//		toast.setView(layout);
+//		toast.show();
 
-		TextView text = (TextView) layout.findViewById(R.id.tvToast);
-		text.setText("P1 chose " + myWeapon + ". \nP2 chose " + opponentWeapon + ".");
-
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		toast.setDuration(Toast.LENGTH_SHORT);
-		toast.setView(layout);
-		toast.show();
-
-		Intent i = new Intent(getApplicationContext(), TwoPWinActivity.class);
-		i.putExtra("myWeapon", myWeapon);
-		i.putExtra("opponentWeapon", opponentWeapon);
-		i.putExtra("playMode", "pass");
-		startActivity(i);
-		overridePendingTransition(R.anim.fade_in, R.anim.stay);
-		finish();
+		expandOpponent();
 	}
+	
+	@Override
+	public void expandOpponent() {
+		tvChoose.setVisibility(TextView.INVISIBLE);
+		btnFight.setVisibility(Button.INVISIBLE);
+		
+		AnimatorSet animA = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+				R.animator.property_x_to_left);
+		animA.setTarget(rlPlayspace);
+		AnimatorSet animB = (AnimatorSet) AnimatorInflater.loadAnimator(this,
+				R.animator.property_x_to_right);
+		animB.setTarget(rlOpponent);
+		
+		AnimatorSet anim1 = new AnimatorSet();
+		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlPlayspace, "alpha", 0.0f, 1.0f).setDuration(3000));
+
+		AnimatorSet set = new AnimatorSet();
+		set.playSequentially(anim1, ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(1000));
+		set.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+
+				Intent i = new Intent(getApplicationContext(),
+						TwoPWinActivity.class);
+				i.putExtra("myWeapon", myWeapon);
+				i.putExtra("opponentWeapon", opponentWeapon);
+				i.putExtra("playMode", "pass");
+				startActivity(i);
+				overridePendingTransition(R.anim.fade_in, R.anim.stay);
+				finish();
+			}
+		});
+		set.start();
+	}
+
 }

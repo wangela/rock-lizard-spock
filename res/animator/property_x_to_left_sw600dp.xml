@@ -13,6 +13,6 @@
     <objectAnimator
         android:duration="3000"
         android:propertyName="x"
-        android:valueTo="-300.0" />
+        android:valueTo="-200.0" />
 
 </set>

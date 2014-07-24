@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvChoose"
-        style="@style/LightText.Instruction"
+        style="@style/LightText.Large.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         <FrameLayout
             android:id="@+id/flOpponent"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:background="@color/black" >
 
             <ImageView
@@ -53,7 +53,7 @@
 
         <TextView
             android:id="@+id/tvOpponent"
-            style="@style/LightText.White"
+            style="@style/LightText.Large.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/flOpponent"
@@ -74,7 +74,7 @@
         <FrameLayout
             android:id="@+id/flPlayspace"
             android:layout_width="wrap_content"
-            android:layout_height="300dp" >
+            android:layout_height="wrap_content" >
 
             <ImageView
                 android:id="@+id/ivHotspots"
@@ -108,7 +108,7 @@
 
         <TextView
             android:id="@+id/tvChoice"
-            style="@style/LightText"
+            style="@style/LightText.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/flPlayspace"
@@ -120,7 +120,7 @@
 
     <Button
         android:id="@+id/btnFight"
-        style="@style/FightButton"
+        style="@style/FightButton.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/rlPlayspace"

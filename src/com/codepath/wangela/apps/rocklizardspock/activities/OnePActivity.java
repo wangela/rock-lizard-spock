@@ -27,18 +27,16 @@ import com.codepath.wangela.apps.rocklizardspock.helpers.ColorTool;
 import com.codepath.wangela.apps.rocklizardspock.models.Weapon;
 
 public class OnePActivity extends Activity {
-	private ImageView ivGray;
-	private ImageView ivOpponentGray;
-	private ImageView iv;
-	private ImageView ivO;
-	private Button btnFight;
 	private RelativeLayout rlPlayspace;
 	private RelativeLayout rlOpponent;
+	private ImageView ivGray;
+	private ImageView ivOpponentGray;
+	private ImageView arrows;
+	private ImageView oArrows;
+	private int nextImage = 0;
 	private TextView tvChoice;
 	private TextView tvOpponent;
-	private ImageView hotspots;
-	private ImageView arrows;
-	private int nextImage = 0;
+	private Button btnFight;
 	private String myWeapon;
 	Weapon opponentWeapon;
 
@@ -82,16 +80,15 @@ public class OnePActivity extends Activity {
 	}
 
 	private void setupViews() {
-		btnFight = (Button) findViewById(R.id.btnFight);
 		rlPlayspace = (RelativeLayout) findViewById(R.id.rlPlayspace);
 		rlOpponent = (RelativeLayout) findViewById(R.id.rlOpponent);
-		ivO = (ImageView) findViewById(R.id.ivOpponentArrows);
-		tvOpponent = (TextView) findViewById(R.id.tvOpponent);
-		ivOpponentGray = (ImageView) findViewById(R.id.ivOpponentChooseGray);
-		hotspots = (ImageView) findViewById(R.id.ivHotspots);
 		ivGray = (ImageView) findViewById(R.id.ivChooseGray);
 		arrows = (ImageView) findViewById(R.id.ivArrows);
+		oArrows = (ImageView) findViewById(R.id.ivOpponentArrows);
+		tvOpponent = (TextView) findViewById(R.id.tvOpponent);
+		ivOpponentGray = (ImageView) findViewById(R.id.ivOpponentChooseGray);
 		tvChoice = (TextView) findViewById(R.id.tvChoice);
+		btnFight = (Button) findViewById(R.id.btnFight);
 
 		ivGray.setOnTouchListener(new OnTouchListener() {
 			@Override
@@ -173,7 +170,7 @@ public class OnePActivity extends Activity {
 			oImage = R.drawable.arrows_scissors;
 		}
 		if (oImage > 0) {
-			ivO.setImageResource(oImage);
+			oArrows.setImageResource(oImage);
 		}
 
 		tvOpponent.setText("Android chooses "
@@ -192,14 +189,14 @@ public class OnePActivity extends Activity {
 		animB.setTarget(rlOpponent);
 		
 		AnimatorSet anim1 = new AnimatorSet();
-		anim1.playTogether(animA, animB);
+		anim1.playTogether(animA, animB, ObjectAnimator.ofFloat(rlOpponent, "alpha", 0.0f, 1.0f).setDuration(3000));
 
 		AnimatorSet anim3 = new AnimatorSet();
 		anim3.playTogether(
-				ObjectAnimator.ofFloat(ivO, "alpha", 1.0f).setDuration(0),
+				ObjectAnimator.ofFloat(oArrows, "alpha", 1.0f).setDuration(0),
 				ObjectAnimator.ofFloat(tvOpponent, "alpha", 1.0f)
 						.setDuration(0),
-				ObjectAnimator.ofFloat(ivO, "rotationBy", 0.0f).setDuration(
+				ObjectAnimator.ofFloat(oArrows, "rotationBy", 0.0f).setDuration(
 						1000));
 
 		AnimatorSet set = new AnimatorSet();

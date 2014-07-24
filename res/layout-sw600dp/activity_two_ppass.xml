@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rlOneP"
+    android:id="@+id/rlTwoPPass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvChoose"
-        style="@style/LightText.Instruction"
+        android:id="@+id/tvPChoose"
+        style="@style/LightText.Large.Instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/choose_your_weapon" />
+        android:text="@string/choose_your_weaponP" />
 
     <RelativeLayout
-        android:id="@+id/rlOpponent"
+        android:id="@+id/rlPOpponent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvChoose"
+        android:layout_below="@+id/tvPChoose"
         android:alpha="0"
         android:background="@color/black" >
 
         <FrameLayout
-            android:id="@+id/flOpponent"
+            android:id="@+id/flPOpponent"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:background="@color/black" >
 
             <ImageView
-                android:id="@+id/ivOpponentChooseGray"
+                android:id="@+id/ivPOpponentChooseGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -41,43 +40,7 @@
                 android:src="@drawable/choose_gray" />
 
             <ImageView
-                android:id="@+id/ivOpponentArrows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:alpha="0"
-                android:src="@drawable/choose" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/tvOpponent"
-            style="@style/LightText.White"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/flOpponent"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="2dp"
-            android:alpha="0" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlPlayspace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvChoose"
-        android:gravity="center_horizontal"
-        android:background="@color/white" >
-
-        <FrameLayout
-            android:id="@+id/flPlayspace"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp" >
-
-            <ImageView
-                android:id="@+id/ivHotspots"
+                android:id="@+id/ivPOpponentHotspots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -87,7 +50,52 @@
                 android:visibility="invisible" />
 
             <ImageView
-                android:id="@+id/ivChooseGray"
+                android:id="@+id/ivPOpponentArrows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/choose_gray" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvPOpponent"
+            style="@style/LightText.Large.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/flPOpponent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlPPlayspace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPChoose"
+        android:background="@color/white"
+        android:gravity="center_horizontal" >
+
+        <FrameLayout
+            android:id="@+id/flPPlayspace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ivPHotspots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/hotspots"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ivPChooseGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -96,7 +104,7 @@
                 android:src="@drawable/choose_gray" />
 
             <ImageView
-                android:id="@+id/ivArrows"
+                android:id="@+id/ivPArrows"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -107,27 +115,44 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tvChoice"
-            style="@style/LightText"
+            android:id="@+id/tvPChoice"
+            style="@style/LightText.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/flPlayspace"
+            android:layout_below="@id/flPPlayspace"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="2dp"
             android:visibility="invisible" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnFight"
-        style="@style/FightButton"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/flPButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rlPlayspace"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:onClick="onFight"
-        android:text="@string/fight"
-        android:visibility="invisible" />
+        android:layout_below="@id/rlPPlayspace" >
+
+        <Button
+            android:id="@+id/btnPFight"
+            style="@style/FightButton.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onFight"
+            android:text="@string/fight"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnPChoose"
+            style="@style/FightButton.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onChoose"
+            android:text="@string/choose"
+            android:visibility="invisible" />
+    </FrameLayout>
 
 </RelativeLayout>
