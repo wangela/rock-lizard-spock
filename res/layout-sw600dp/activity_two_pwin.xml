@@ -55,14 +55,28 @@
         android:onClick="onAgain"
         android:text="@string/again" />
 
-    <Button
-        android:id="@+id/btnTShare"
-        style="@style/FightButton.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:onClick="onShare"
-        android:text="@string/share" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnTShare"
+            style="@style/FightButton.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:onClick="onShare"
+            android:text="@string/share" />
+
+        <ProgressBar
+            android:id="@+id/pbTShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/btnTShare"
+            android:visibility="invisible" >
+        </ProgressBar>
+    </RelativeLayout>
 
 </LinearLayout>

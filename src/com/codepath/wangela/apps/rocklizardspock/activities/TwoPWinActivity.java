@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,6 @@ import com.codepath.wangela.apps.rocklizardspock.models.OpenGraphUtils.RLSWeapon
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
 import com.facebook.Session;
-import com.facebook.SessionDefaultAudience;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphObject;
@@ -36,10 +36,74 @@ public class TwoPWinActivity extends WinActivity {
 	private String winVerb;
 	private TextView tvOutcome;
 	private TextView tvWinRule;
+	private ProgressBar pbShare;
 	private int nextImage;
 	private ImageView ivOutcome;
 	private UiLifecycleHelper uiHelper;
 	private Activity myActivity;
+
+	// Listen for session opening and then check for permissions
+	private class SessionStatusCallback implements Session.StatusCallback {
+		@Override
+	    public void call(Session session, SessionState state, Exception exception) {
+	    	if (session.isOpened()) {
+	    		if (session.getPermissions().contains("publish_actions")) {
+				composeSharePost();
+				} else {
+				requestSharePermissions(session);
+				}
+	    	}
+	    }
+	}
+
+	// Listen for changes to session state, to aid uiHelper
+	private Session.StatusCallback uiCallback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {
+			onSessionStateChange(session, state, exception);
+		}
+	};
+	
+	// Listen for when publish permissions are granted
+	private Session.StatusCallback statusCallback = new SessionStatusCallback() {
+		// TODO Handle when session opens
+	};
+	
+	private Session.StatusCallback newPermissionsCallback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {
+			if (exception != null && !session.isOpened()
+					&& session.getPermissions().contains("publish_actions")) {
+				composeSharePost();
+			}
+		}
+	};
+
+	// public void onLogin(View v) {
+	//
+	// try {
+	// PackageInfo info = getPackageManager().getPackageInfo(
+	// "com.codepath.wangela.apps.rocklizardspock",
+	// PackageManager.GET_SIGNATURES);
+	// for (Signature signature : info.signatures) {
+	// MessageDigest md = MessageDigest.getInstance("SHA");
+	// md.update(signature.toByteArray());
+	// TextView welcome = (TextView) findViewById(R.id.welcome);
+	// welcome.setText("KeyHash:"
+	// + Base64.encodeToString(md.digest(), Base64.DEFAULT));
+	// }
+	// } catch (NameNotFoundException e) {
+	// Toast.makeText(myActivity, "Name not found", Toast.LENGTH_SHORT)
+	// .show();
+	//
+	// } catch (NoSuchAlgorithmException e) {
+	// Toast.makeText(myActivity, "No such algorithm", Toast.LENGTH_SHORT)
+	// .show();
+	//
+	// }
+	// }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +116,10 @@ public class TwoPWinActivity extends WinActivity {
 		setupViews();
 
 		myActivity = this;
-
-		uiHelper = new UiLifecycleHelper(this, null);
+		
+		uiHelper = new UiLifecycleHelper(this, uiCallback);
 		uiHelper.onCreate(savedInstanceState);
 	}
-
 
 	private void setupViews() {
 		tvOutcome = (TextView) findViewById(R.id.tvTOutcome);
@@ -82,6 +145,8 @@ public class TwoPWinActivity extends WinActivity {
 		ivOutcome = (ImageView) findViewById(R.id.ivTWinImage);
 		ivOutcome.setImageResource(nextImage);
 		ivOutcome.setVisibility(ImageView.VISIBLE);
+		
+		pbShare = (ProgressBar) findViewById(R.id.pbTShare);
 	}
 
 	private void pickWinner() {
@@ -310,74 +375,23 @@ public class TwoPWinActivity extends WinActivity {
 		}
 
 	}
+	
+	public void onShare (View v) {
+		Toast.makeText(this, "Facebook posting will be live in August 2014 when we get Facebook approval. Update the app then to be able to share!", Toast.LENGTH_LONG).show();
+	}
 
-//	public void onLogin(View v) {
-//
-//		try {
-//			PackageInfo info = getPackageManager().getPackageInfo(
-//					"com.codepath.wangela.apps.rocklizardspock",
-//					PackageManager.GET_SIGNATURES);
-//			for (Signature signature : info.signatures) {
-//				MessageDigest md = MessageDigest.getInstance("SHA");
-//				md.update(signature.toByteArray());
-//				TextView welcome = (TextView) findViewById(R.id.welcome);
-//				welcome.setText("KeyHash:"
-//						+ Base64.encodeToString(md.digest(), Base64.DEFAULT));
-//			}
-//		} catch (NameNotFoundException e) {
-//			Toast.makeText(myActivity, "Name not found", Toast.LENGTH_SHORT)
-//					.show();
-//
-//		} catch (NoSuchAlgorithmException e) {
-//			Toast.makeText(myActivity, "No such algorithm", Toast.LENGTH_SHORT)
-//					.show();
-//
-//		}
-//	}
-
-	private Session.StatusCallback newPermissionsCallback = new Session.StatusCallback() {
-		@Override
-		public void call(Session session, SessionState state,
-				Exception exception) {
-			if (exception != null || !session.isOpened()
-					|| !session.getPermissions().contains("publish_actions")) {
-				// this means the user has not granted us permissions, so we
-				// will not create a post
-			} else {
-				composeSharePost();
-			}
-		}
-	};
-
-	public void onShare(View v) {
-		final Session session = Session.getActiveSession();
-		if (session != null && session.isOpened()
-				&& session.getPermissions().contains("publish_actions")) {
-			composeSharePost();
-		} else if (session != null && session.isOpened()) {
-			Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
-					TwoPWinActivity.this, "publish_actions")
-					.setCallback(newPermissionsCallback);
-			session.requestNewPublishPermissions(newPermissionsRequest);
-		} else if (session == null) {
-			Session.openActiveSession(this, true, new Session.StatusCallback() {
-
-				// callback when session changes state
-				@Override
-				public void call(Session session, SessionState state,
-						Exception exception) {
-
-					if (session.isOpened()) {
-						Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
-								myActivity, Arrays.asList("publish_actions"))
-								.setDefaultAudience(
-										SessionDefaultAudience.FRIENDS)
-								.setCallback(newPermissionsCallback);
-						session.requestNewPublishPermissions(newPermissionsRequest);
-					}
-				}
-			});
-		}
+	public void onFBShare(View v) {
+		pbShare.setVisibility(ProgressBar.VISIBLE);
+		
+		Session existingSession = Session.getActiveSession();
+		// If we have a valid existing session, we'll use it; if not, open one
+		// using the provided Intent
+		// but do not cache the token (we don't want to use the same user
+		// identity the next time the
+		// app is run).
+		if (existingSession == null || !existingSession.isOpened()) {
+			Session.openActiveSession(myActivity, true, statusCallback);
+		} // TODO Check for / request permissions if session is already open
 
 		// /* make the API call */
 		// new Request(session, "/{app-link-host-id}", null,
@@ -390,6 +404,22 @@ public class TwoPWinActivity extends WinActivity {
 		// }
 		// }).executeAsync();
 
+	}
+
+	private void onSessionStateChange(Session session, SessionState state,
+			Exception exception) {
+		if (state.isOpened()) {
+			// Toast.makeText(this, "Logged in...", Toast.LENGTH_SHORT).show();
+		} else if (state.isClosed()) {
+			// Toast.makeText(this, "Logged out...", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void requestSharePermissions(Session session) {
+		Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(
+				this, Arrays.asList("publish_actions"))
+				.setCallback(newPermissionsCallback);
+		session.requestNewPublishPermissions(newPermissionsRequest);
 	}
 
 	private void composeSharePost() {
@@ -464,6 +494,55 @@ public class TwoPWinActivity extends WinActivity {
 		}
 	}
 
+	private void publishFeedDialog() {
+		Bundle params = new Bundle();
+		params.putString("name", "Rock Paper Scissors Lizard Spock");
+		params.putString("caption", "The app for Android devices");
+		params.putString(
+				"description",
+				"This game popularized by television show The Big Bang Theory reduces the chances of a tie by adding two new weapons to the classic game of Rock Paper Scissors.");
+		params.putString("link", "https://developers.facebook.com/android");
+		params.putString(
+				"picture",
+				"https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-xfp1/t39.2081-0/p128x128/10173502_275529322631924_1885431941_n.png");
+	
+		WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(
+				getApplicationContext(), Session.getActiveSession(), params))
+				.setOnCompleteListener(new OnCompleteListener() {
+	
+					@Override
+					public void onComplete(Bundle values,
+							FacebookException error) {
+						if (error == null) {
+							// When the story is posted, echo the success
+							// and the post Id.
+							final String postId = values.getString("post_id");
+							if (postId != null) {
+								Toast.makeText(getApplicationContext(),
+										"Posted story, id: " + postId,
+										Toast.LENGTH_SHORT).show();
+							} else {
+								// User clicked the Cancel button
+								Toast.makeText(getApplicationContext(),
+										"Publish cancelled", Toast.LENGTH_SHORT)
+										.show();
+							}
+						} else if (error instanceof FacebookOperationCanceledException) {
+							// User clicked the "x" button
+							Toast.makeText(getApplicationContext(),
+									"Publish cancelled", Toast.LENGTH_SHORT)
+									.show();
+						} else {
+							// Generic, ex: network error
+							Toast.makeText(getApplicationContext(),
+									"Error posting story", Toast.LENGTH_SHORT)
+									.show();
+						}
+					}
+				}).build();
+		feedDialog.show();
+	}
+
 	private RLSWeapon createRlsWeapon(String type) {
 		RLSWeapon weapon = OpenGraphObject.Factory.createForPost(
 				RLSWeapon.class, opponentWeapon);
@@ -498,11 +577,21 @@ public class TwoPWinActivity extends WinActivity {
 								Toast.LENGTH_LONG).show();
 					}
 				});
+		pbShare.setVisibility(ProgressBar.INVISIBLE);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		// For scenarios where the main activity is launched and user
+		// session is not null, the session state change notification
+		// may not be triggered. Trigger it if it's open/closed.
+		Session session = Session.getActiveSession();
+		if (session != null && (session.isOpened() || session.isClosed())) {
+			onSessionStateChange(session, session.getState(), null);
+		}
+
 		uiHelper.onResume();
 	}
 
@@ -522,55 +611,6 @@ public class TwoPWinActivity extends WinActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		uiHelper.onDestroy();
-	}
-
-	private void publishFeedDialog() {
-		Bundle params = new Bundle();
-		params.putString("name", "Rock Paper Scissors Lizard Spock");
-		params.putString("caption", "The app for Android devices");
-		params.putString(
-				"description",
-				"This game popularized by television show The Big Bang Theory reduces the chances of a tie by adding two new weapons to the classic game of Rock Paper Scissors.");
-		params.putString("link", "https://developers.facebook.com/android");
-		params.putString(
-				"picture",
-				"https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-xfp1/t39.2081-0/p128x128/10173502_275529322631924_1885431941_n.png");
-
-		WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(
-				getApplicationContext(), Session.getActiveSession(), params))
-				.setOnCompleteListener(new OnCompleteListener() {
-
-					@Override
-					public void onComplete(Bundle values,
-							FacebookException error) {
-						if (error == null) {
-							// When the story is posted, echo the success
-							// and the post Id.
-							final String postId = values.getString("post_id");
-							if (postId != null) {
-								Toast.makeText(getApplicationContext(),
-										"Posted story, id: " + postId,
-										Toast.LENGTH_SHORT).show();
-							} else {
-								// User clicked the Cancel button
-								Toast.makeText(getApplicationContext(),
-										"Publish cancelled", Toast.LENGTH_SHORT)
-										.show();
-							}
-						} else if (error instanceof FacebookOperationCanceledException) {
-							// User clicked the "x" button
-							Toast.makeText(getApplicationContext(),
-									"Publish cancelled", Toast.LENGTH_SHORT)
-									.show();
-						} else {
-							// Generic, ex: network error
-							Toast.makeText(getApplicationContext(),
-									"Error posting story", Toast.LENGTH_SHORT)
-									.show();
-						}
-					}
-				}).build();
-		feedDialog.show();
 	}
 
 }
